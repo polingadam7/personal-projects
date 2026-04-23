@@ -1,0 +1,39 @@
+# Environment / credentials
+.env
+*.env
+KrakenPass.txt
+*password*
+*secret*
+*credentials*
+
+# Scraper output / data
+*.csv
+!*.example.csv
+*.json
+!package.json
+!package-lock.json
+
+# Image datasets
+species_images/
+*.jpg
+*.jpeg
+*.png
+*.gif
+
+# LinkedIn scraper debug output
+debug_*.html
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
