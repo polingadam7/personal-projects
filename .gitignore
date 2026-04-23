@@ -5,6 +5,8 @@ KrakenPass.txt
 *password*
 *secret*
 *credentials*
+keys/
+*.pem
 
 # Scraper output / data
 *.csv
@@ -12,6 +14,12 @@ KrakenPass.txt
 *.json
 !package.json
 !package-lock.json
+!railway.json
+
+# Backtest output
+backtest_results.csv
+backtest_calibration.csv
+price_history.csv
 
 # Image datasets
 species_images/

@@ -1,0 +1,6 @@
+cryptography
+python-dotenv
+requests
+pandas
+numpy
+streamlit
