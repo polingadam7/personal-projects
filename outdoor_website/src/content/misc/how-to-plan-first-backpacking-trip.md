@@ -6,7 +6,7 @@ description: "A practical checklist for first-timers — from picking a route to
 
 ## Start Smaller Than You Think
 
-The most common first-timer mistake is picking too ambitious a route. A 2-night, 15-mile loop on a well-marked trail is a genuinely great first backpacking trip. Save the remote wilderness for year two.
+Most people pick too ambitious a route their first time. A 2-night, 15-mile loop on a well-marked trail is enough to figure out what you're doing. Save the remote wilderness for year two.
 
 Good criteria for a first trip:
 - Well-marked trail (no navigation required beyond following blazes)
@@ -57,4 +57,4 @@ For a 2-night trip at moderate activity, most people need:
 - Filter water before you need it, not when you're desperate
 - Keep food in a bear canister or hang it — don't leave it in your tent
 
-The first trip is about figuring out what you like and what you'd change. Take notes.
+Pay attention to what bothered you. That's what you fix for the next one.

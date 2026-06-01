@@ -16,9 +16,7 @@ We started at the Vallecito Trailhead and followed the creek north before cuttin
 
 The first 8 miles are deceptively easy. Flat trail along the creek, good footing, and consistent shade. We made camp just past the wilderness boundary near a wide bend in the creek. Water was abundant and clear all the way up.
 
-**What worked:** The early miles let us settle into a rhythm before the real climbing started on day two.
-
-**What didn't:** We packed too much food. Between three people we brought 6 pounds of food per day — way more than we needed on the easy first day.
+The early miles let us settle into a pace before the real climbing started on day two. We also packed too much food — 6 pounds per person per day, which was overkill for a flat creek walk.
 
 ## Day 2 — The Climb
 
@@ -32,7 +30,7 @@ The Pine River Trail is beautiful but exposed. Long stretches of open meadow wit
 
 ## Food Notes
 
-Using the Trail Provisions calorie calculator before this trip we targeted 3,200 cal/day at moderate activity. We actually hit about 2,800 on day 1 (easier than expected) and probably burned closer to 3,800 on day 2. The calculator's moderate estimate was a good middle-ground anchor.
+We ran the numbers before leaving and targeted 3,200 cal/day. In practice, day 1 felt more like 2,800 and day 2 was probably 3,800+. The 3,200 estimate split the difference reasonably well.
 
 Standout meals:
 - **Breakfast:** Oatmeal with Justin's peanut butter and a packet of instant coffee — ~520 cal, done in 10 minutes

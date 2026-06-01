@@ -11,7 +11,7 @@ price: 12.99
 
 ## Bottom Line
 
-One of the best freeze-dried meals available. It rehydrates reliably, tastes noticeably better than generic alternatives, and 650 calories covers a solid chunk of your dinner target after a hard day. The main knock is price — at $13 a meal, it adds up fast on longer trips.
+Consistently good and reliable. It rehydrates well, tastes better than most freeze-dried options, and 650 calories is enough for most hard days. The price is the only real complaint — at $13 a meal, it adds up fast.
 
 ## Taste
 
@@ -34,11 +34,11 @@ At 135 cal/oz it's above the 100 cal/oz benchmark, which is good.
 
 ## Value
 
-$12.99 per meal is the main downside. For comparison, a ramen upgrade dinner costs ~$2 for similar calories. Mountain House makes sense for: resupply boxes on long trails, days where you're too exhausted to care about cooking, or when you want something that consistently delivers without thinking.
+$12.99 per meal is the main downside. For comparison, a ramen upgrade dinner costs ~$2 for similar calories. Worth it on resupply boxes, after genuinely hard days, or any time you don't want to think about dinner.
 
 ## Who It's For
 
-Great for casual backpackers, car campers, or as a "treat" meal on harder days of a longer trip. Budget-conscious thru-hikers will likely lean on ramen and pasta sides for daily dinners and save Mountain House for special occasions.
+Great for casual backpackers, car campers, or as a "treat" meal on harder days of a longer trip. Thru-hikers watching their budget will mostly eat ramen and pasta sides and pull one of these out on a hard day.
 
 ## Rating Breakdown
 

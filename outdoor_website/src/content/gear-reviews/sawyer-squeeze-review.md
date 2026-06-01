@@ -1,7 +1,7 @@
 ---
 title: "Sawyer Squeeze Water Filter Review"
 date: 2024-05-10
-description: "The Sawyer Squeeze has become the default water filter for thru-hikers. Here's why — and the one thing most reviews don't mention."
+description: "The default water filter for thru-hikers, and the backflushing detail most reviews skip."
 product: "Squeeze Water Filter System"
 brand: "Sawyer"
 category: "Water Filtration"
@@ -11,7 +11,7 @@ price: 34.99
 
 ## Bottom Line
 
-The best all-around backpacking water filter at any price. Lightweight, reliable, fast enough, and the 0.1 micron hollow fiber filter removes bacteria and protozoa without chemicals or waiting. After testing it on 200+ miles of Colorado trails, it remains the default recommendation for anyone who asks.
+The best all-around backpacking water filter at any price. Lightweight, reliable, fast enough, and the 0.1 micron hollow fiber filter removes bacteria and protozoa without chemicals or waiting. After 200+ miles of Colorado trails, it's still what gets recommended when someone asks.
 
 ## Specs
 
@@ -31,7 +31,7 @@ The best all-around backpacking water filter at any price. Lightweight, reliable
 
 **Cost.** $35 for a filter that never expires is outstanding value.
 
-## The Thing Most Reviews Don't Mention
+## Backflushing
 
 Flow rate degrades noticeably after 50–100 liters if you don't backflush regularly. The included syringe is for backflushing — use it every 2-3 days on trail or whenever flow starts to slow. Takes 30 seconds and restores full flow rate.
 
