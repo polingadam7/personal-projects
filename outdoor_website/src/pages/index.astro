@@ -4,79 +4,100 @@ import Base from '../layouts/Base.astro';
 
 <Base
   title="Backpacking Food Calculator — How Much Food Do You Need?"
-  description="Calculate exactly how much food to bring backpacking. Get personalized calorie targets, daily food weight, and meal ideas based on your trip length and activity level."
+  description="Calculate exactly how much food to bring backpacking. Enter your miles, elevation, pack weight, and temperature for a personalized daily calorie target."
 >
 
-  <!-- Hero -->
   <header class="bg-green-800 text-white py-12 px-6">
     <div class="max-w-4xl mx-auto">
       <h1 class="text-3xl sm:text-4xl font-bold mb-3 leading-tight">
         Backpacking Food Ideas &amp; Calorie Calculator
       </h1>
       <p class="text-green-200 text-lg max-w-2xl">
-        Stop guessing how much food to bring. Enter your trip details and get a personalized
-        calorie target, daily food weight, and real meal ideas — instantly.
+        Enter your trip details for a personalized calorie target — miles, elevation,
+        pack weight, and temperature all factored in.
       </p>
     </div>
   </header>
 
   <div class="max-w-4xl mx-auto px-6 py-10 space-y-10">
 
-    <!-- ── Calculator Card ── -->
+    <!-- ── Calculator ── -->
     <section class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6 sm:p-8">
       <h2 class="text-2xl font-bold mb-7 text-green-900">Calculate Your Food Needs</h2>
 
-      <form id="calc-form" class="space-y-8">
+      <form id="calc-form" class="space-y-7">
 
+        <!-- Trip length -->
         <div>
           <label class="block font-semibold text-stone-700 mb-2">
             Trip length: <span id="days-display" class="text-green-700">3 days</span>
           </label>
           <input type="range" id="days" min="1" max="21" value="3" class="w-full h-2 accent-green-700 cursor-pointer" />
-          <div class="flex justify-between text-xs text-stone-400 mt-1 px-0.5">
+          <div class="flex justify-between text-xs text-stone-400 mt-1">
             <span>1 day</span><span>1 week</span><span>2 weeks</span><span>3 weeks</span>
           </div>
         </div>
 
+        <!-- People -->
         <div>
           <label for="people" class="block font-semibold text-stone-700 mb-2">Number of people</label>
           <input type="number" id="people" min="1" max="30" value="1"
             class="w-24 border border-stone-300 rounded-lg px-3 py-2 text-center font-medium focus:outline-none focus:ring-2 focus:ring-green-600" />
         </div>
 
+        <hr class="border-stone-100" />
+
+        <!-- Miles per day -->
         <div>
-          <p class="font-semibold text-stone-700 mb-3">Activity level</p>
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <label id="card-easy" class="cursor-pointer">
-              <input type="radio" name="activity" value="easy" class="sr-only" />
-              <div class="border-2 border-stone-200 rounded-xl p-4 hover:border-green-400 transition-colors">
-                <div class="font-semibold text-stone-800">Easy</div>
-                <div class="text-xs text-stone-500 mt-1">Flat trails, &lt;8 mi/day, light pack</div>
-                <div class="text-sm font-bold text-green-700 mt-2">~2,500 cal/day</div>
-              </div>
-            </label>
-            <label id="card-moderate" class="cursor-pointer">
-              <input type="radio" name="activity" value="moderate" checked class="sr-only" />
-              <div class="border-2 border-green-600 rounded-xl p-4 bg-green-50">
-                <div class="font-semibold text-stone-800">Moderate</div>
-                <div class="text-xs text-stone-500 mt-1">8–12 mi/day, some elevation, ~30 lb pack</div>
-                <div class="text-sm font-bold text-green-700 mt-2">~3,200 cal/day</div>
-              </div>
-            </label>
-            <label id="card-strenuous" class="cursor-pointer">
-              <input type="radio" name="activity" value="strenuous" class="sr-only" />
-              <div class="border-2 border-stone-200 rounded-xl p-4 hover:border-green-400 transition-colors">
-                <div class="font-semibold text-stone-800">Strenuous</div>
-                <div class="text-xs text-stone-500 mt-1">12+ mi/day, big elevation, or off-trail</div>
-                <div class="text-sm font-bold text-green-700 mt-2">~4,000 cal/day</div>
-              </div>
-            </label>
+          <label class="block font-semibold text-stone-700 mb-2">
+            Miles per day: <span id="miles-display" class="text-green-700">8 miles</span>
+          </label>
+          <input type="range" id="miles" min="1" max="25" value="8" class="w-full h-2 accent-green-700 cursor-pointer" />
+          <div class="flex justify-between text-xs text-stone-400 mt-1">
+            <span>1</span><span>8</span><span>16</span><span>25</span>
           </div>
         </div>
 
+        <!-- Elevation gain -->
+        <div>
+          <label class="block font-semibold text-stone-700 mb-2">
+            Elevation gain per day: <span id="ascent-display" class="text-green-700">1,000 ft</span>
+          </label>
+          <input type="range" id="ascent" min="0" max="6000" step="100" value="1000" class="w-full h-2 accent-green-700 cursor-pointer" />
+          <div class="flex justify-between text-xs text-stone-400 mt-1">
+            <span>flat</span><span>1,500 ft</span><span>3,000 ft</span><span>6,000 ft</span>
+          </div>
+        </div>
+
+        <!-- Pack weight -->
+        <div>
+          <label class="block font-semibold text-stone-700 mb-2">
+            Pack weight: <span id="pack-display" class="text-green-700">30 lbs</span>
+          </label>
+          <input type="range" id="pack" min="10" max="70" value="30" class="w-full h-2 accent-green-700 cursor-pointer" />
+          <div class="flex justify-between text-xs text-stone-400 mt-1">
+            <span>10 lbs</span><span>ultralight</span><span>standard</span><span>70 lbs</span>
+          </div>
+        </div>
+
+        <!-- Temperature -->
+        <div>
+          <label class="block font-semibold text-stone-700 mb-2">
+            Temperature: <span id="temp-display" class="text-green-700">55°F</span>
+          </label>
+          <input type="range" id="temp" min="-20" max="95" value="55" class="w-full h-2 accent-green-700 cursor-pointer" />
+          <div class="flex justify-between text-xs text-stone-400 mt-1">
+            <span>-20°F</span><span>freezing</span><span>60°F</span><span>95°F</span>
+          </div>
+        </div>
+
+        <hr class="border-stone-100" />
+
+        <!-- Body weight -->
         <div>
           <label for="weight" class="block font-semibold text-stone-700 mb-1">
-            Your weight <span class="font-normal text-stone-400 text-sm ml-1">(optional — improves accuracy)</span>
+            Your body weight
+            <span class="font-normal text-stone-400 text-sm ml-1">(optional — improves accuracy)</span>
           </label>
           <div class="flex items-center gap-2">
             <input type="number" id="weight" min="80" max="400" placeholder="150"
@@ -95,6 +116,8 @@ import Base from '../layouts/Base.astro';
 
     <!-- ── Results ── -->
     <section id="results" class="hidden space-y-6">
+
+      <!-- Summary bar -->
       <div class="bg-green-900 text-white rounded-2xl p-6 sm:p-8">
         <h2 class="text-green-300 font-semibold uppercase text-xs tracking-widest mb-5">Your Food Plan</h2>
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
@@ -105,37 +128,60 @@ import Base from '../layouts/Base.astro';
         </div>
       </div>
 
-      <div id="density-tip" class="bg-amber-50 border border-amber-200 rounded-xl px-5 py-4 text-sm text-amber-800 hidden">
-        <strong>Heads up:</strong> At your calorie target, you're carrying about <span id="density-oz" class="font-bold"></span> oz/day.
-        Consider adding olive oil (240 cal/oz) or nut butter packets to hit calories without overpacking weight.
+      <!-- Calorie breakdown -->
+      <div class="bg-white border border-stone-200 rounded-xl p-6">
+        <h3 class="font-bold text-stone-800 mb-4">Calorie Breakdown</h3>
+        <div class="space-y-2 text-sm">
+          <div class="flex justify-between text-stone-600">
+            <span>Resting metabolism (BMR)</span>
+            <span id="b-bmr" class="font-medium tabular-nums text-stone-800">—</span>
+          </div>
+          <div class="flex justify-between text-stone-600">
+            <span id="b-hiking-label">Hiking</span>
+            <span id="b-hiking" class="font-medium tabular-nums text-stone-800">—</span>
+          </div>
+          <div class="flex justify-between text-stone-600">
+            <span id="b-elev-label">Elevation gain</span>
+            <span id="b-elev" class="font-medium tabular-nums text-stone-800">—</span>
+          </div>
+          <div id="b-cold-row" class="flex justify-between text-stone-600 hidden">
+            <span id="b-cold-label">Cold weather thermogenesis</span>
+            <span id="b-cold" class="font-medium tabular-nums text-stone-800">—</span>
+          </div>
+          <div class="flex justify-between font-bold text-stone-900 pt-2 border-t border-stone-100">
+            <span>Total</span>
+            <span id="b-total" class="tabular-nums">—</span>
+          </div>
+        </div>
       </div>
 
+      <!-- Meal breakdown -->
       <div>
         <h3 class="text-xl font-bold text-stone-800 mb-4">Daily Meal Breakdown</h3>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div class="bg-white rounded-xl border border-stone-200 p-5">
-            <div class="flex items-center justify-between mb-3"><h4 class="font-semibold text-stone-800">🌄 Breakfast</h4><span id="meal-breakfast" class="text-green-700 font-bold">— cal</span></div>
+            <div class="flex items-center justify-between mb-3"><h4 class="font-semibold text-stone-800">🌄 Breakfast</h4><span id="meal-breakfast" class="text-green-700 font-bold">—</span></div>
             <ul class="text-sm text-stone-600 space-y-1">
               <li>Instant oatmeal (2 packets) — 320 cal</li><li>Peanut butter packet — 190 cal</li><li>Instant coffee — 10 cal</li>
               <li class="text-stone-400 italic text-xs mt-2">Fill remaining with granola, protein bar, or grits</li>
             </ul>
           </div>
           <div class="bg-white rounded-xl border border-stone-200 p-5">
-            <div class="flex items-center justify-between mb-3"><h4 class="font-semibold text-stone-800">🥪 Lunch</h4><span id="meal-lunch" class="text-green-700 font-bold">— cal</span></div>
+            <div class="flex items-center justify-between mb-3"><h4 class="font-semibold text-stone-800">🥪 Lunch</h4><span id="meal-lunch" class="text-green-700 font-bold">—</span></div>
             <ul class="text-sm text-stone-600 space-y-1">
               <li>2 large tortillas — 280 cal</li><li>Tuna or chicken packet — 100 cal</li><li>Hard cheese (1 oz) — 110 cal</li>
               <li class="text-stone-400 italic text-xs mt-2">Fill remaining with salami, crackers, or hummus powder</li>
             </ul>
           </div>
           <div class="bg-white rounded-xl border border-stone-200 p-5">
-            <div class="flex items-center justify-between mb-3"><h4 class="font-semibold text-stone-800">🥜 Snacks</h4><span id="meal-snacks" class="text-green-700 font-bold">— cal</span></div>
+            <div class="flex items-center justify-between mb-3"><h4 class="font-semibold text-stone-800">🥜 Snacks</h4><span id="meal-snacks" class="text-green-700 font-bold">—</span></div>
             <ul class="text-sm text-stone-600 space-y-1">
               <li>Trail mix (½ cup) — 350 cal</li><li>Energy bar — 240 cal</li><li>Nut butter packet — 190 cal</li>
               <li class="text-stone-400 italic text-xs mt-2">Fill remaining with Peanut M&amp;Ms, jerky, or dried fruit</li>
             </ul>
           </div>
           <div class="bg-white rounded-xl border border-stone-200 p-5">
-            <div class="flex items-center justify-between mb-3"><h4 class="font-semibold text-stone-800">🍲 Dinner</h4><span id="meal-dinner" class="text-green-700 font-bold">— cal</span></div>
+            <div class="flex items-center justify-between mb-3"><h4 class="font-semibold text-stone-800">🍲 Dinner</h4><span id="meal-dinner" class="text-green-700 font-bold">—</span></div>
             <ul class="text-sm text-stone-600 space-y-1">
               <li>Freeze-dried meal — 600–800 cal</li><li>Ramen + olive oil + cheese — 500 cal</li><li>Instant mashed potatoes + bacon bits — 450 cal</li>
               <li class="text-stone-400 italic text-xs mt-2">Freeze-dried easiest after hard days; ramen is the budget option</li>
@@ -144,15 +190,52 @@ import Base from '../layouts/Base.astro';
         </div>
       </div>
 
+      <!-- Tips -->
       <div class="bg-stone-100 rounded-xl p-6">
         <h3 class="font-bold text-stone-800 mb-3">💡 Packing Tips</h3>
         <ul class="text-sm text-stone-700 space-y-2">
-          <li><strong>Target 100 cal/oz</strong> — the standard backpacker benchmark.</li>
-          <li><strong>Add 10–15% buffer</strong> on trips longer than 3 days.</li>
-          <li><strong>Olive oil is the cheat code</strong> — 240 cal/oz, adds to any dinner.</li>
-          <li><strong>Eat fresh food first</strong> — bring an apple or bagel for day 1.</li>
+          <li><strong>Target 100 cal/oz</strong> — the standard backpacker benchmark. Below that and your pack gets heavy fast.</li>
+          <li><strong>Add 10–15% buffer</strong> on trips longer than 3 days — calorie burn on big elevation days can surprise you.</li>
+          <li><strong>Olive oil is the cheat code</strong> — 240 cal/oz, adds to any dinner, weighs almost nothing.</li>
+          <li><strong>Eat fresh food first</strong> — bring an apple or bagel for day 1, then switch to shelf-stable.</li>
         </ul>
       </div>
+
+      <!-- Methodology -->
+      <details class="bg-white border border-stone-200 rounded-xl overflow-hidden">
+        <summary class="px-6 py-4 font-semibold text-stone-700 cursor-pointer hover:bg-stone-50 transition-colors list-none flex items-center justify-between">
+          <span>📐 Methodology</span>
+          <span class="text-stone-400 text-sm">How we calculate this</span>
+        </summary>
+        <div class="px-6 pb-6 pt-2 text-sm text-stone-600 space-y-4 border-t border-stone-100">
+          <p>The total calorie estimate is the sum of four components:</p>
+
+          <div>
+            <p class="font-semibold text-stone-800 mb-1">1. Resting Metabolic Rate (BMR)</p>
+            <p>A simplified estimate of the calories your body burns at rest over 24 hours, scaled by body weight. We use <code class="bg-stone-100 px-1 rounded">1,800 × (body_weight / 150)</code> as the baseline, which aligns with standard RMR estimates for a moderately active adult. This covers breathing, temperature regulation, and all non-exercise body functions.</p>
+          </div>
+
+          <div>
+            <p class="font-semibold text-stone-800 mb-1">2. Hiking calories</p>
+            <p>Based on the energy cost of locomotion: approximately <code class="bg-stone-100 px-1 rounded">60 cal/mile × (body_weight / 150)</code> on flat ground. Pack weight increases the metabolic load proportionally — a 30 lb pack on a 150 lb person adds roughly 20% to hiking calories. This is consistent with published research on load carriage energetics (Pandolf et al., 1977; Givoni &amp; Goldman, 1971).</p>
+          </div>
+
+          <div>
+            <p class="font-semibold text-stone-800 mb-1">3. Elevation gain</p>
+            <p>Climbing costs approximately <code class="bg-stone-100 px-1 rounded">0.5 cal/ft × (body_weight / 150)</code>. This is derived from the vertical work component of the Pandolf equation and validated against metabolic studies on inclined treadmill walking. Descent is not subtracted — the eccentric muscle work of downhill hiking also burns meaningful calories and causes delayed muscle damage.</p>
+          </div>
+
+          <div>
+            <p class="font-semibold text-stone-800 mb-1">4. Cold weather thermogenesis</p>
+            <p>Below 50°F, your body expends additional energy maintaining core temperature (non-shivering thermogenesis and shivering). We apply a flat bonus: <strong>+150 cal</strong> (32–50°F), <strong>+250 cal</strong> (20–32°F), <strong>+400 cal</strong> (below 20°F). These figures are conservative estimates from cold exposure research and assume adequate insulation — if you're underdressed, actual burn will be higher.</p>
+          </div>
+
+          <p class="text-stone-400 text-xs pt-2 border-t border-stone-100">
+            Note: individual variation in metabolism can be ±15–20%. This calculator provides a useful starting estimate — adjust based on your personal experience over multiple trips.
+          </p>
+        </div>
+      </details>
+
     </section>
 
     <!-- ── SEO Content ── -->
@@ -170,54 +253,80 @@ import Base from '../layouts/Base.astro';
   </div>
 
   <script>
-    const daysInput   = document.getElementById('days') as HTMLInputElement
-    const daysDisplay = document.getElementById('days-display')!
-    daysInput.addEventListener('input', () => {
-      const d = parseInt(daysInput.value)
-      daysDisplay.textContent = d === 1 ? '1 day' : `${d} days`
+    // ── Slider displays ───────────────────────────────────────────────────────
+    const sliders: [string, string, (v: number) => string][] = [
+      ['days',   'days-display',   v => v === 1 ? '1 day' : `${v} days`],
+      ['miles',  'miles-display',  v => `${v} mile${v !== 1 ? 's' : ''}`],
+      ['ascent', 'ascent-display', v => v === 0 ? 'flat' : `${v.toLocaleString()} ft`],
+      ['pack',   'pack-display',   v => `${v} lbs`],
+      ['temp',   'temp-display',   v => `${v}°F`],
+    ]
+    sliders.forEach(([id, displayId, fmt]) => {
+      const el = document.getElementById(id) as HTMLInputElement
+      const display = document.getElementById(displayId)!
+      el.addEventListener('input', () => { display.textContent = fmt(parseInt(el.value)) })
     })
 
-    const SELECTED   = ['border-green-600', 'bg-green-50']
-    const UNSELECTED = ['border-stone-200']
-    function setCard(value: string) {
-      for (const level of ['easy', 'moderate', 'strenuous']) {
-        const card = document.querySelector(`#card-${level} div`) as HTMLElement
-        card.classList.remove(...SELECTED, ...UNSELECTED, 'hover:border-green-400', 'transition-colors')
-        if (level === value) { card.classList.add(...SELECTED) }
-        else { card.classList.add(...UNSELECTED, 'hover:border-green-400', 'transition-colors') }
-      }
-    }
-    document.querySelectorAll<HTMLInputElement>('input[name="activity"]').forEach(r => r.addEventListener('change', () => setCard(r.value)))
+    // ── Calorie calculation ───────────────────────────────────────────────────
+    function calcCalories(bodyWeight: number, miles: number, ascent: number, packWeight: number, tempF: number) {
+      const wRatio = bodyWeight / 150
 
-    const BASE_CALORIES: Record<string, number> = { easy: 2500, moderate: 3200, strenuous: 4000 }
-    const MEAL_SPLIT: Record<string, number>    = { breakfast: 0.25, lunch: 0.20, dinner: 0.30, snacks: 0.25 }
+      const bmr        = Math.round(1800 * wRatio)
+      const hikingCal  = Math.round(60 * wRatio * (1 + packWeight / bodyWeight) * miles)
+      const elevCal    = Math.round(0.5 * ascent * wRatio)
+      const coldCal    = tempF < 20 ? 400 : tempF < 32 ? 250 : tempF < 50 ? 150 : 0
+
+      return { total: bmr + hikingCal + elevCal + coldCal, bmr, hikingCal, elevCal, coldCal }
+    }
+
+    const MEAL_SPLIT: Record<string, number> = { breakfast: 0.25, lunch: 0.20, dinner: 0.30, snacks: 0.25 }
 
     document.getElementById('calc-form')!.addEventListener('submit', (e) => {
       e.preventDefault()
-      const days      = parseInt(daysInput.value)
-      const people    = Math.max(1, parseInt((document.getElementById('people') as HTMLInputElement).value) || 1)
-      const activity  = document.querySelector<HTMLInputElement>('input[name="activity"]:checked')!.value
-      const weightRaw = (document.getElementById('weight') as HTMLInputElement).value
-      const weight    = weightRaw ? parseFloat(weightRaw) : 150
 
-      const caloriesPerDay = Math.round(BASE_CALORIES[activity] * (weight / 150))
-      const ozPerDay       = Math.round(caloriesPerDay / 100)
-      const lbsPerDay      = (ozPerDay / 16).toFixed(1)
-      const totalLbs       = ((ozPerDay * days * people) / 16).toFixed(1)
+      const days       = parseInt((document.getElementById('days')   as HTMLInputElement).value)
+      const people     = Math.max(1, parseInt((document.getElementById('people') as HTMLInputElement).value) || 1)
+      const miles      = parseInt((document.getElementById('miles')  as HTMLInputElement).value)
+      const ascent     = parseInt((document.getElementById('ascent') as HTMLInputElement).value)
+      const packWeight = parseInt((document.getElementById('pack')   as HTMLInputElement).value)
+      const tempF      = parseInt((document.getElementById('temp')   as HTMLInputElement).value)
+      const weightRaw  = (document.getElementById('weight') as HTMLInputElement).value
+      const bodyWeight = weightRaw ? parseFloat(weightRaw) : 150
 
-      document.getElementById('res-calories')!.textContent     = caloriesPerDay.toLocaleString()
-      document.getElementById('res-oz')!.textContent           = String(ozPerDay)
-      document.getElementById('res-lbs-day')!.textContent      = lbsPerDay
-      document.getElementById('res-total')!.textContent        = totalLbs
-      document.getElementById('res-total-label')!.textContent  = people > 1 ? `total lbs (${people} people)` : `total lbs (${days} day${days !== 1 ? 's' : ''})`
+      const { total, bmr, hikingCal, elevCal, coldCal } = calcCalories(bodyWeight, miles, ascent, packWeight, tempF)
 
-      for (const [meal, pct] of Object.entries(MEAL_SPLIT)) {
-        document.getElementById(`meal-${meal}`)!.textContent = `${Math.round(caloriesPerDay * pct).toLocaleString()} cal`
+      const ozPerDay  = Math.round(total / 100)
+      const lbsPerDay = (ozPerDay / 16).toFixed(1)
+      const totalLbs  = ((ozPerDay * days * people) / 16).toFixed(1)
+
+      // Summary
+      document.getElementById('res-calories')!.textContent    = total.toLocaleString()
+      document.getElementById('res-oz')!.textContent          = String(ozPerDay)
+      document.getElementById('res-lbs-day')!.textContent     = lbsPerDay
+      document.getElementById('res-total')!.textContent       = totalLbs
+      document.getElementById('res-total-label')!.textContent = people > 1 ? `total lbs (${people} people)` : `total lbs (${days} day${days !== 1 ? 's' : ''})`
+
+      // Breakdown
+      document.getElementById('b-bmr')!.textContent          = `${bmr.toLocaleString()} cal`
+      document.getElementById('b-hiking-label')!.textContent = `Hiking (${miles} mi, ${packWeight} lb pack)`
+      document.getElementById('b-hiking')!.textContent       = `${hikingCal.toLocaleString()} cal`
+      document.getElementById('b-elev-label')!.textContent   = `Elevation (${ascent.toLocaleString()} ft)`
+      document.getElementById('b-elev')!.textContent         = `${elevCal.toLocaleString()} cal`
+      document.getElementById('b-total')!.textContent        = `${total.toLocaleString()} cal`
+
+      const coldRow = document.getElementById('b-cold-row')!
+      if (coldCal > 0) {
+        document.getElementById('b-cold-label')!.textContent = `Cold weather (${tempF}°F)`
+        document.getElementById('b-cold')!.textContent       = `${coldCal.toLocaleString()} cal`
+        coldRow.classList.remove('hidden')
+      } else {
+        coldRow.classList.add('hidden')
       }
 
-      const densityTip = document.getElementById('density-tip')!
-      document.getElementById('density-oz')!.textContent = String(ozPerDay)
-      ozPerDay > 26 ? densityTip.classList.remove('hidden') : densityTip.classList.add('hidden')
+      // Meals
+      for (const [meal, pct] of Object.entries(MEAL_SPLIT)) {
+        document.getElementById(`meal-${meal}`)!.textContent = `${Math.round(total * pct).toLocaleString()} cal`
+      }
 
       const results = document.getElementById('results')!
       results.classList.remove('hidden')
