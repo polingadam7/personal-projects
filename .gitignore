@@ -15,6 +15,7 @@ keys/
 !package.json
 !package-lock.json
 !railway.json
+!tsconfig.json
 
 # Backtest output
 backtest_results.csv

@@ -1,25 +1,11 @@
 ---
-const title = "Backpacking Food Calculator — How Much Food Do You Need?";
-const description = "Calculate exactly how much food to bring backpacking. Get personalized calorie targets, daily food weight, and meal ideas based on your trip length and activity level.";
+import Base from '../layouts/Base.astro';
 ---
 
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content={description} />
-  <title>{title}</title>
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-</head>
-<body class="bg-stone-50 text-stone-900 antialiased">
-
-  <!-- Nav -->
-  <nav class="bg-green-900 text-white px-6 py-4">
-    <div class="max-w-4xl mx-auto flex items-center justify-between">
-      <a href="/" class="font-bold text-xl tracking-tight">Trail Provisions</a>
-      <span class="text-green-300 text-sm hidden sm:block">Free tools for the trail</span>
-    </div>
-  </nav>
+<Base
+  title="Backpacking Food Calculator — How Much Food Do You Need?"
+  description="Calculate exactly how much food to bring backpacking. Get personalized calorie targets, daily food weight, and meal ideas based on your trip length and activity level."
+>
 
   <!-- Hero -->
   <header class="bg-green-800 text-white py-12 px-6">
@@ -34,7 +20,7 @@ const description = "Calculate exactly how much food to bring backpacking. Get p
     </div>
   </header>
 
-  <main class="max-w-4xl mx-auto px-6 py-10 space-y-10">
+  <div class="max-w-4xl mx-auto px-6 py-10 space-y-10">
 
     <!-- ── Calculator Card ── -->
     <section class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6 sm:p-8">
@@ -42,35 +28,25 @@ const description = "Calculate exactly how much food to bring backpacking. Get p
 
       <form id="calc-form" class="space-y-8">
 
-        <!-- Days slider -->
         <div>
           <label class="block font-semibold text-stone-700 mb-2">
             Trip length: <span id="days-display" class="text-green-700">3 days</span>
           </label>
-          <input
-            type="range" id="days" min="1" max="21" value="3"
-            class="w-full h-2 accent-green-700 cursor-pointer"
-          />
+          <input type="range" id="days" min="1" max="21" value="3" class="w-full h-2 accent-green-700 cursor-pointer" />
           <div class="flex justify-between text-xs text-stone-400 mt-1 px-0.5">
             <span>1 day</span><span>1 week</span><span>2 weeks</span><span>3 weeks</span>
           </div>
         </div>
 
-        <!-- People -->
         <div>
           <label for="people" class="block font-semibold text-stone-700 mb-2">Number of people</label>
-          <input
-            type="number" id="people" min="1" max="30" value="1"
-            class="w-24 border border-stone-300 rounded-lg px-3 py-2 text-center font-medium
-                   focus:outline-none focus:ring-2 focus:ring-green-600"
-          />
+          <input type="number" id="people" min="1" max="30" value="1"
+            class="w-24 border border-stone-300 rounded-lg px-3 py-2 text-center font-medium focus:outline-none focus:ring-2 focus:ring-green-600" />
         </div>
 
-        <!-- Activity level -->
         <div>
           <p class="font-semibold text-stone-700 mb-3">Activity level</p>
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-
             <label id="card-easy" class="cursor-pointer">
               <input type="radio" name="activity" value="easy" class="sr-only" />
               <div class="border-2 border-stone-200 rounded-xl p-4 hover:border-green-400 transition-colors">
@@ -79,7 +55,6 @@ const description = "Calculate exactly how much food to bring backpacking. Get p
                 <div class="text-sm font-bold text-green-700 mt-2">~2,500 cal/day</div>
               </div>
             </label>
-
             <label id="card-moderate" class="cursor-pointer">
               <input type="radio" name="activity" value="moderate" checked class="sr-only" />
               <div class="border-2 border-green-600 rounded-xl p-4 bg-green-50">
@@ -88,7 +63,6 @@ const description = "Calculate exactly how much food to bring backpacking. Get p
                 <div class="text-sm font-bold text-green-700 mt-2">~3,200 cal/day</div>
               </div>
             </label>
-
             <label id="card-strenuous" class="cursor-pointer">
               <input type="radio" name="activity" value="strenuous" class="sr-only" />
               <div class="border-2 border-stone-200 rounded-xl p-4 hover:border-green-400 transition-colors">
@@ -97,290 +71,158 @@ const description = "Calculate exactly how much food to bring backpacking. Get p
                 <div class="text-sm font-bold text-green-700 mt-2">~4,000 cal/day</div>
               </div>
             </label>
-
           </div>
         </div>
 
-        <!-- Body weight (optional) -->
         <div>
           <label for="weight" class="block font-semibold text-stone-700 mb-1">
-            Your weight
-            <span class="font-normal text-stone-400 text-sm ml-1">(optional — improves accuracy)</span>
+            Your weight <span class="font-normal text-stone-400 text-sm ml-1">(optional — improves accuracy)</span>
           </label>
           <div class="flex items-center gap-2">
-            <input
-              type="number" id="weight" min="80" max="400" placeholder="150"
-              class="w-24 border border-stone-300 rounded-lg px-3 py-2 text-center
-                     focus:outline-none focus:ring-2 focus:ring-green-600"
-            />
+            <input type="number" id="weight" min="80" max="400" placeholder="150"
+              class="w-24 border border-stone-300 rounded-lg px-3 py-2 text-center focus:outline-none focus:ring-2 focus:ring-green-600" />
             <span class="text-stone-500">lbs</span>
           </div>
         </div>
 
-        <button
-          type="submit"
-          class="w-full sm:w-auto bg-green-700 hover:bg-green-800 active:bg-green-900
-                 text-white font-semibold px-8 py-3 rounded-xl transition-colors text-lg"
-        >
+        <button type="submit"
+          class="w-full sm:w-auto bg-green-700 hover:bg-green-800 active:bg-green-900 text-white font-semibold px-8 py-3 rounded-xl transition-colors text-lg">
           Calculate my food needs →
         </button>
 
       </form>
     </section>
 
-    <!-- ── Results (hidden until calculated) ── -->
+    <!-- ── Results ── -->
     <section id="results" class="hidden space-y-6">
-
-      <!-- Summary bar -->
       <div class="bg-green-900 text-white rounded-2xl p-6 sm:p-8">
         <h2 class="text-green-300 font-semibold uppercase text-xs tracking-widest mb-5">Your Food Plan</h2>
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
-          <div>
-            <div id="res-calories" class="text-4xl font-bold tabular-nums">—</div>
-            <div class="text-green-300 text-sm mt-1">cal / person / day</div>
-          </div>
-          <div>
-            <div id="res-oz" class="text-4xl font-bold tabular-nums">—</div>
-            <div class="text-green-300 text-sm mt-1">oz food / day</div>
-          </div>
-          <div>
-            <div id="res-lbs-day" class="text-4xl font-bold tabular-nums">—</div>
-            <div class="text-green-300 text-sm mt-1">lbs food / day</div>
-          </div>
-          <div>
-            <div id="res-total" class="text-4xl font-bold tabular-nums">—</div>
-            <div id="res-total-label" class="text-green-300 text-sm mt-1">total lbs</div>
-          </div>
+          <div><div id="res-calories" class="text-4xl font-bold tabular-nums">—</div><div class="text-green-300 text-sm mt-1">cal / person / day</div></div>
+          <div><div id="res-oz" class="text-4xl font-bold tabular-nums">—</div><div class="text-green-300 text-sm mt-1">oz food / day</div></div>
+          <div><div id="res-lbs-day" class="text-4xl font-bold tabular-nums">—</div><div class="text-green-300 text-sm mt-1">lbs food / day</div></div>
+          <div><div id="res-total" class="text-4xl font-bold tabular-nums">—</div><div id="res-total-label" class="text-green-300 text-sm mt-1">total lbs</div></div>
         </div>
       </div>
 
-      <!-- Cal density tip -->
       <div id="density-tip" class="bg-amber-50 border border-amber-200 rounded-xl px-5 py-4 text-sm text-amber-800 hidden">
-        <strong>Heads up:</strong> At your calorie target, you're carrying about
-        <span id="density-oz" class="font-bold"></span> oz/day.
-        That's on the <span id="density-adj" class="font-bold"></span> side — consider adding
-        high-density items like olive oil (240 cal/oz) or nut butter packets to hit your calories without overpacking weight.
+        <strong>Heads up:</strong> At your calorie target, you're carrying about <span id="density-oz" class="font-bold"></span> oz/day.
+        Consider adding olive oil (240 cal/oz) or nut butter packets to hit calories without overpacking weight.
       </div>
 
-      <!-- Meal breakdown -->
       <div>
         <h3 class="text-xl font-bold text-stone-800 mb-4">Daily Meal Breakdown</h3>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-
           <div class="bg-white rounded-xl border border-stone-200 p-5">
-            <div class="flex items-center justify-between mb-3">
-              <h4 class="font-semibold text-stone-800">🌄 Breakfast</h4>
-              <span id="meal-breakfast" class="text-green-700 font-bold">— cal</span>
-            </div>
+            <div class="flex items-center justify-between mb-3"><h4 class="font-semibold text-stone-800">🌄 Breakfast</h4><span id="meal-breakfast" class="text-green-700 font-bold">— cal</span></div>
             <ul class="text-sm text-stone-600 space-y-1">
-              <li>Instant oatmeal (2 packets) — 320 cal</li>
-              <li>Peanut butter packet — 190 cal</li>
-              <li>Instant coffee — 10 cal</li>
+              <li>Instant oatmeal (2 packets) — 320 cal</li><li>Peanut butter packet — 190 cal</li><li>Instant coffee — 10 cal</li>
               <li class="text-stone-400 italic text-xs mt-2">Fill remaining with granola, protein bar, or grits</li>
             </ul>
           </div>
-
           <div class="bg-white rounded-xl border border-stone-200 p-5">
-            <div class="flex items-center justify-between mb-3">
-              <h4 class="font-semibold text-stone-800">🥪 Lunch</h4>
-              <span id="meal-lunch" class="text-green-700 font-bold">— cal</span>
-            </div>
+            <div class="flex items-center justify-between mb-3"><h4 class="font-semibold text-stone-800">🥪 Lunch</h4><span id="meal-lunch" class="text-green-700 font-bold">— cal</span></div>
             <ul class="text-sm text-stone-600 space-y-1">
-              <li>2 large tortillas — 280 cal</li>
-              <li>Tuna or chicken packet — 100 cal</li>
-              <li>Hard cheese (1 oz) — 110 cal</li>
+              <li>2 large tortillas — 280 cal</li><li>Tuna or chicken packet — 100 cal</li><li>Hard cheese (1 oz) — 110 cal</li>
               <li class="text-stone-400 italic text-xs mt-2">Fill remaining with salami, crackers, or hummus powder</li>
             </ul>
           </div>
-
           <div class="bg-white rounded-xl border border-stone-200 p-5">
-            <div class="flex items-center justify-between mb-3">
-              <h4 class="font-semibold text-stone-800">🥜 Snacks</h4>
-              <span id="meal-snacks" class="text-green-700 font-bold">— cal</span>
-            </div>
+            <div class="flex items-center justify-between mb-3"><h4 class="font-semibold text-stone-800">🥜 Snacks</h4><span id="meal-snacks" class="text-green-700 font-bold">— cal</span></div>
             <ul class="text-sm text-stone-600 space-y-1">
-              <li>Trail mix (½ cup) — 350 cal</li>
-              <li>Energy bar — 240 cal</li>
-              <li>Nut butter packet — 190 cal</li>
+              <li>Trail mix (½ cup) — 350 cal</li><li>Energy bar — 240 cal</li><li>Nut butter packet — 190 cal</li>
               <li class="text-stone-400 italic text-xs mt-2">Fill remaining with Peanut M&amp;Ms, jerky, or dried fruit</li>
             </ul>
           </div>
-
           <div class="bg-white rounded-xl border border-stone-200 p-5">
-            <div class="flex items-center justify-between mb-3">
-              <h4 class="font-semibold text-stone-800">🍲 Dinner</h4>
-              <span id="meal-dinner" class="text-green-700 font-bold">— cal</span>
-            </div>
+            <div class="flex items-center justify-between mb-3"><h4 class="font-semibold text-stone-800">🍲 Dinner</h4><span id="meal-dinner" class="text-green-700 font-bold">— cal</span></div>
             <ul class="text-sm text-stone-600 space-y-1">
-              <li>Freeze-dried meal — 600–800 cal</li>
-              <li>Ramen + olive oil + cheese — 500 cal</li>
-              <li>Instant mashed potatoes + bacon bits — 450 cal</li>
+              <li>Freeze-dried meal — 600–800 cal</li><li>Ramen + olive oil + cheese — 500 cal</li><li>Instant mashed potatoes + bacon bits — 450 cal</li>
               <li class="text-stone-400 italic text-xs mt-2">Freeze-dried easiest after hard days; ramen is the budget option</li>
             </ul>
           </div>
-
         </div>
       </div>
 
-      <!-- Pro tips -->
       <div class="bg-stone-100 rounded-xl p-6">
         <h3 class="font-bold text-stone-800 mb-3">💡 Packing Tips</h3>
         <ul class="text-sm text-stone-700 space-y-2">
-          <li><strong>Target 100 cal/oz</strong> — the standard backpacker benchmark. Below that and your pack gets heavy fast.</li>
-          <li><strong>Add 10–15% buffer</strong> on trips longer than 3 days — calorie burn on big elevation days can surprise you.</li>
-          <li><strong>Olive oil is the cheat code</strong> — 240 cal/oz, adds to any dinner, weighs almost nothing.</li>
-          <li><strong>Eat fresh food first</strong> — bring an apple or bagel sandwich for day 1, then switch to shelf-stable.</li>
+          <li><strong>Target 100 cal/oz</strong> — the standard backpacker benchmark.</li>
+          <li><strong>Add 10–15% buffer</strong> on trips longer than 3 days.</li>
+          <li><strong>Olive oil is the cheat code</strong> — 240 cal/oz, adds to any dinner.</li>
+          <li><strong>Eat fresh food first</strong> — bring an apple or bagel for day 1.</li>
         </ul>
       </div>
-
     </section>
 
     <!-- ── SEO Content ── -->
     <section class="space-y-6 pb-10">
       <h2 class="text-2xl font-bold text-stone-800">Backpacking Food Ideas by Meal Type</h2>
-      <p class="text-stone-600 leading-relaxed">
-        The best backpacking food hits three criteria: lightweight, calorie-dense, and easy to prepare — ideally
-        just boiling water or no cooking at all. Here's what experienced backpackers actually bring.
-      </p>
-
+      <p class="text-stone-600 leading-relaxed">The best backpacking food hits three criteria: lightweight, calorie-dense, and easy to prepare. Here's what experienced backpackers actually bring.</p>
       <div class="grid sm:grid-cols-2 gap-6">
-
-        <div>
-          <h3 class="text-lg font-semibold text-stone-800 mb-2">Breakfast Ideas</h3>
-          <p class="text-stone-600 text-sm leading-relaxed">
-            Mornings are about fueling up fast. Instant oatmeal packets, granola with powdered milk,
-            and Pop-Tarts all hit 150–400 calories and weigh almost nothing. Justin's or Trader Joe's
-            peanut butter packets (190 cal each) add protein without any cooking.
-          </p>
-        </div>
-
-        <div>
-          <h3 class="text-lg font-semibold text-stone-800 mb-2">No-Cook Lunch Ideas</h3>
-          <p class="text-stone-600 text-sm leading-relaxed">
-            Most backpackers skip the stove at lunch. Tortillas with tuna packets, hard cheese,
-            salami, and crackers are trail staples. Avoid low-density snacks like plain pretzels —
-            they bulk up your pack without the calories you need.
-          </p>
-        </div>
-
-        <div>
-          <h3 class="text-lg font-semibold text-stone-800 mb-2">Snack Ideas</h3>
-          <p class="text-stone-600 text-sm leading-relaxed">
-            GORP (good old raisins and peanuts), nut butter packets, Peanut M&amp;Ms, and energy bars
-            are the backbone of any snack strategy. Dried mango and apricots add variety without
-            sacrificing too much calorie density.
-          </p>
-        </div>
-
-        <div>
-          <h3 class="text-lg font-semibold text-stone-800 mb-2">Dinner Ideas</h3>
-          <p class="text-stone-600 text-sm leading-relaxed">
-            Freeze-dried meals (Mountain House, Good To-Go) run $10–14 but pack 600–800 calories in
-            ~5 oz. Budget alternative: ramen enhanced with olive oil, a cheese packet, and bacon bits.
-            Knorr pasta sides and instant mashed potatoes are solid base camps for a calorie-dense dinner.
-          </p>
-        </div>
-
+        <div><h3 class="text-lg font-semibold text-stone-800 mb-2">Breakfast Ideas</h3><p class="text-stone-600 text-sm leading-relaxed">Instant oatmeal, granola with powdered milk, and Pop-Tarts all hit 150–400 calories and weigh almost nothing. Peanut butter packets add protein without cooking.</p></div>
+        <div><h3 class="text-lg font-semibold text-stone-800 mb-2">No-Cook Lunch Ideas</h3><p class="text-stone-600 text-sm leading-relaxed">Tortillas with tuna packets, hard cheese, salami, and crackers. Avoid low-density snacks like plain pretzels — they bulk up your pack without the calories you need.</p></div>
+        <div><h3 class="text-lg font-semibold text-stone-800 mb-2">Snack Ideas</h3><p class="text-stone-600 text-sm leading-relaxed">GORP, nut butter packets, Peanut M&amp;Ms, and energy bars. Dried mango and apricots add variety without sacrificing too much calorie density.</p></div>
+        <div><h3 class="text-lg font-semibold text-stone-800 mb-2">Dinner Ideas</h3><p class="text-stone-600 text-sm leading-relaxed">Freeze-dried meals run $10–14 but pack 600–800 cal in ~5 oz. Budget alternative: ramen with olive oil, cheese, and bacon bits. Knorr pasta sides are solid too.</p></div>
       </div>
     </section>
 
-  </main>
-
-  <footer class="border-t border-stone-200 py-8 text-center text-sm text-stone-400">
-    Trail Provisions — Free tools for outdoor planning
-  </footer>
+  </div>
 
   <script>
-    // ── Days slider ──────────────────────────────────────────────────────────
-    const daysInput  = document.getElementById('days') as HTMLInputElement
+    const daysInput   = document.getElementById('days') as HTMLInputElement
     const daysDisplay = document.getElementById('days-display')!
-
     daysInput.addEventListener('input', () => {
       const d = parseInt(daysInput.value)
       daysDisplay.textContent = d === 1 ? '1 day' : `${d} days`
     })
 
-    // ── Activity card highlight ───────────────────────────────────────────────
-    const SELECTED  = ['border-green-600', 'bg-green-50']
+    const SELECTED   = ['border-green-600', 'bg-green-50']
     const UNSELECTED = ['border-stone-200']
-
     function setCard(value: string) {
       for (const level of ['easy', 'moderate', 'strenuous']) {
         const card = document.querySelector(`#card-${level} div`) as HTMLElement
-        const isSelected = level === value
         card.classList.remove(...SELECTED, ...UNSELECTED, 'hover:border-green-400', 'transition-colors')
-        if (isSelected) {
-          card.classList.add(...SELECTED)
-        } else {
-          card.classList.add(...UNSELECTED, 'hover:border-green-400', 'transition-colors')
-        }
+        if (level === value) { card.classList.add(...SELECTED) }
+        else { card.classList.add(...UNSELECTED, 'hover:border-green-400', 'transition-colors') }
       }
     }
+    document.querySelectorAll<HTMLInputElement>('input[name="activity"]').forEach(r => r.addEventListener('change', () => setCard(r.value)))
 
-    document.querySelectorAll<HTMLInputElement>('input[name="activity"]').forEach(radio => {
-      radio.addEventListener('change', () => setCard(radio.value))
-    })
-
-    // ── Calculator ───────────────────────────────────────────────────────────
-    const BASE_CALORIES: Record<string, number> = {
-      easy: 2500,
-      moderate: 3200,
-      strenuous: 4000,
-    }
-
-    const MEAL_SPLIT: Record<string, number> = {
-      breakfast: 0.25,
-      lunch:     0.20,
-      dinner:    0.30,
-      snacks:    0.25,
-    }
+    const BASE_CALORIES: Record<string, number> = { easy: 2500, moderate: 3200, strenuous: 4000 }
+    const MEAL_SPLIT: Record<string, number>    = { breakfast: 0.25, lunch: 0.20, dinner: 0.30, snacks: 0.25 }
 
     document.getElementById('calc-form')!.addEventListener('submit', (e) => {
       e.preventDefault()
-
-      const days     = parseInt(daysInput.value)
-      const people   = Math.max(1, parseInt((document.getElementById('people') as HTMLInputElement).value) || 1)
-      const activity = (document.querySelector<HTMLInputElement>('input[name="activity"]:checked'))!.value
+      const days      = parseInt(daysInput.value)
+      const people    = Math.max(1, parseInt((document.getElementById('people') as HTMLInputElement).value) || 1)
+      const activity  = document.querySelector<HTMLInputElement>('input[name="activity"]:checked')!.value
       const weightRaw = (document.getElementById('weight') as HTMLInputElement).value
-      const weight   = weightRaw ? parseFloat(weightRaw) : 150
+      const weight    = weightRaw ? parseFloat(weightRaw) : 150
 
-      // Calories scaled by body weight (baseline 150 lbs)
       const caloriesPerDay = Math.round(BASE_CALORIES[activity] * (weight / 150))
+      const ozPerDay       = Math.round(caloriesPerDay / 100)
+      const lbsPerDay      = (ozPerDay / 16).toFixed(1)
+      const totalLbs       = ((ozPerDay * days * people) / 16).toFixed(1)
 
-      const ozPerDay   = Math.round(caloriesPerDay / 100)
-      const lbsPerDay  = (ozPerDay / 16).toFixed(1)
-      const totalLbs   = ((ozPerDay * days * people) / 16).toFixed(1)
+      document.getElementById('res-calories')!.textContent     = caloriesPerDay.toLocaleString()
+      document.getElementById('res-oz')!.textContent           = String(ozPerDay)
+      document.getElementById('res-lbs-day')!.textContent      = lbsPerDay
+      document.getElementById('res-total')!.textContent        = totalLbs
+      document.getElementById('res-total-label')!.textContent  = people > 1 ? `total lbs (${people} people)` : `total lbs (${days} day${days !== 1 ? 's' : ''})`
 
-      // Update summary
-      document.getElementById('res-calories')!.textContent = caloriesPerDay.toLocaleString()
-      document.getElementById('res-oz')!.textContent       = String(ozPerDay)
-      document.getElementById('res-lbs-day')!.textContent  = lbsPerDay
-      document.getElementById('res-total')!.textContent    = totalLbs
-      document.getElementById('res-total-label')!.textContent =
-        people > 1 ? `total lbs (${people} people)` : `total lbs (${days} day${days !== 1 ? 's' : ''})`
-
-      // Meal targets
       for (const [meal, pct] of Object.entries(MEAL_SPLIT)) {
-        const cal = Math.round(caloriesPerDay * pct)
-        document.getElementById(`meal-${meal}`)!.textContent = `${cal.toLocaleString()} cal`
+        document.getElementById(`meal-${meal}`)!.textContent = `${Math.round(caloriesPerDay * pct).toLocaleString()} cal`
       }
 
-      // Density tip
       const densityTip = document.getElementById('density-tip')!
-      if (ozPerDay > 26) {
-        document.getElementById('density-oz')!.textContent  = String(ozPerDay)
-        document.getElementById('density-adj')!.textContent = 'heavy'
-        densityTip.classList.remove('hidden')
-      } else {
-        densityTip.classList.add('hidden')
-      }
+      document.getElementById('density-oz')!.textContent = String(ozPerDay)
+      ozPerDay > 26 ? densityTip.classList.remove('hidden') : densityTip.classList.add('hidden')
 
-      // Show results
       const results = document.getElementById('results')!
       results.classList.remove('hidden')
       results.scrollIntoView({ behavior: 'smooth', block: 'start' })
     })
   </script>
 
-</body>
-</html>
+</Base>

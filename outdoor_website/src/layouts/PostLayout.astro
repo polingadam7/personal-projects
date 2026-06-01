@@ -1,0 +1,43 @@
+---
+import Base from './Base.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  date: Date;
+  backHref: string;
+  backLabel: string;
+  meta?: { label: string; value: string }[];
+}
+const { title, description, date, backHref, backLabel, meta = [] } = Astro.props;
+
+const formatted = date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<Base title={`${title} | Trail Provisions`} description={description}>
+  <div class="max-w-3xl mx-auto px-6 py-10">
+
+    <a href={backHref} class="text-sm text-green-700 hover:underline">← {backLabel}</a>
+
+    <header class="mt-4 mb-8">
+      <h1 class="text-3xl font-bold text-stone-900 mb-2">{title}</h1>
+      <p class="text-stone-500 text-sm mb-3">{formatted}</p>
+      <p class="text-stone-600 text-lg">{description}</p>
+
+      {meta.length > 0 && (
+        <div class="flex flex-wrap gap-3 mt-4">
+          {meta.map(m => (
+            <span class="bg-stone-100 text-stone-700 text-sm px-3 py-1 rounded-full">
+              <span class="font-medium">{m.label}:</span> {m.value}
+            </span>
+          ))}
+        </div>
+      )}
+    </header>
+
+    <article class="prose prose-stone prose-headings:font-bold prose-a:text-green-700 max-w-none">
+      <slot />
+    </article>
+
+  </div>
+</Base>

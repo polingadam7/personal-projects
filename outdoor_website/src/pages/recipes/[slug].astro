@@ -1,0 +1,29 @@
+---
+import PostLayout from '../../layouts/PostLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('recipes');
+  return posts.map(post => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const meta = [
+  post.data.calories && { label: 'Calories',  value: `${post.data.calories} cal` },
+  post.data.prepTime && { label: 'Prep time', value: post.data.prepTime },
+  post.data.servings && { label: 'Serves',    value: String(post.data.servings) },
+].filter(Boolean) as { label: string; value: string }[];
+---
+
+<PostLayout
+  title={post.data.title}
+  description={post.data.description}
+  date={post.data.date}
+  backHref="/recipes"
+  backLabel="All Recipes"
+  meta={meta}
+>
+  <Content />
+</PostLayout>

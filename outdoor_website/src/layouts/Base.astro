@@ -1,0 +1,59 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description = 'Trail Provisions — Tools and content for outdoor planning' } = Astro.props;
+
+const nav = [
+  { label: 'Tools',        href: '/' },
+  { label: 'Trip Reports', href: '/trip-reports' },
+  { label: 'Recipes',      href: '/recipes' },
+  { label: 'Meal Reviews', href: '/meal-reviews' },
+  { label: 'Gear Reviews', href: '/gear-reviews' },
+  { label: 'More',         href: '/misc' },
+];
+
+const path = Astro.url.pathname;
+---
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <title>{title}</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+</head>
+<body class="bg-stone-50 text-stone-900 antialiased min-h-screen flex flex-col">
+
+  <nav class="bg-green-900 text-white sticky top-0 z-10">
+    <div class="max-w-5xl mx-auto px-4 flex items-center overflow-x-auto gap-1 scrollbar-none">
+      <a href="/" class="font-bold text-lg tracking-tight py-4 pr-4 shrink-0 mr-2 border-r border-green-700">
+        Trail Provisions
+      </a>
+      {nav.map(item => (
+        <a
+          href={item.href}
+          class={`px-3 py-4 text-sm whitespace-nowrap transition-colors shrink-0 ${
+            (item.href === '/' ? path === '/' : path.startsWith(item.href))
+              ? 'text-white font-semibold border-b-2 border-green-400'
+              : 'text-green-300 hover:text-white'
+          }`}
+        >
+          {item.label}
+        </a>
+      ))}
+    </div>
+  </nav>
+
+  <main class="flex-1">
+    <slot />
+  </main>
+
+  <footer class="border-t border-stone-200 py-8 text-center text-sm text-stone-400 mt-16">
+    Trail Provisions — Free tools for outdoor planning
+  </footer>
+
+</body>
+</html>

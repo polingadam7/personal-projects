@@ -1,0 +1,32 @@
+---
+import PostLayout from '../../layouts/PostLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('gear-reviews');
+  return posts.map(post => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const stars = '★'.repeat(post.data.rating) + '☆'.repeat(5 - post.data.rating);
+
+const meta = [
+  post.data.brand    && { label: 'Brand',    value: post.data.brand },
+  post.data.category && { label: 'Category', value: post.data.category },
+  { label: 'Rating', value: stars },
+  post.data.price    && { label: 'Price',    value: `$${post.data.price.toFixed(2)}` },
+].filter(Boolean) as { label: string; value: string }[];
+---
+
+<PostLayout
+  title={post.data.title}
+  description={post.data.description}
+  date={post.data.date}
+  backHref="/gear-reviews"
+  backLabel="All Gear Reviews"
+  meta={meta}
+>
+  <Content />
+</PostLayout>
