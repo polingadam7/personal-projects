@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 ---
 
 <Base
-  title="Backpacking Food Calculator — How Much Food Do You Need?"
+  title="Backpacking Food Calculator: How Much Food Do You Need?"
   description="Calculate exactly how much food to bring backpacking. Enter your miles, elevation, pack weight, and temperature for a personalized daily calorie target."
 >
 
@@ -13,7 +13,7 @@ import Base from '../layouts/Base.astro';
         Backpacking Food Ideas &amp; Calorie Calculator
       </h1>
       <p class="text-green-200 text-lg max-w-2xl">
-        Enter your trip details for a personalized calorie target — miles, elevation,
+        Enter your trip details for a personalized calorie target. Miles, elevation,
         pack weight, and temperature all factored in.
       </p>
     </div>
@@ -21,13 +21,12 @@ import Base from '../layouts/Base.astro';
 
   <div class="max-w-4xl mx-auto px-6 py-10 space-y-10">
 
-    <!-- ── Calculator ── -->
+    <!-- Calculator -->
     <section class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6 sm:p-8">
       <h2 class="text-2xl font-bold mb-7 text-green-900">Calculate Your Food Needs</h2>
 
       <form id="calc-form" class="space-y-7">
 
-        <!-- Trip length -->
         <div>
           <label class="block font-semibold text-stone-700 mb-2">
             Trip length: <span id="days-display" class="text-green-700">3 days</span>
@@ -40,7 +39,6 @@ import Base from '../layouts/Base.astro';
 
         <hr class="border-stone-100" />
 
-        <!-- Miles per day -->
         <div>
           <label class="block font-semibold text-stone-700 mb-2">
             Miles per day: <span id="miles-display" class="text-green-700">8 miles</span>
@@ -51,7 +49,6 @@ import Base from '../layouts/Base.astro';
           </div>
         </div>
 
-        <!-- Elevation gain -->
         <div>
           <label class="block font-semibold text-stone-700 mb-2">
             Elevation gain per day: <span id="ascent-display" class="text-green-700">1,000 ft</span>
@@ -62,7 +59,6 @@ import Base from '../layouts/Base.astro';
           </div>
         </div>
 
-        <!-- Pack weight -->
         <div>
           <label class="block font-semibold text-stone-700 mb-2">
             Pack weight: <span id="pack-display" class="text-green-700">30 lbs</span>
@@ -73,7 +69,6 @@ import Base from '../layouts/Base.astro';
           </div>
         </div>
 
-        <!-- Temperature -->
         <div>
           <label class="block font-semibold text-stone-700 mb-2">
             Temperature: <span id="temp-display" class="text-green-700">55°F</span>
@@ -86,11 +81,10 @@ import Base from '../layouts/Base.astro';
 
         <hr class="border-stone-100" />
 
-        <!-- Body weight -->
         <div>
           <label for="weight" class="block font-semibold text-stone-700 mb-1">
             Your body weight
-            <span class="font-normal text-stone-400 text-sm ml-1">(optional — improves accuracy)</span>
+            <span class="font-normal text-stone-400 text-sm ml-1">(optional, improves accuracy)</span>
           </label>
           <div class="flex items-center gap-2">
             <input type="number" id="weight" min="80" max="400" placeholder="150"
@@ -101,118 +95,101 @@ import Base from '../layouts/Base.astro';
 
         <button type="submit"
           class="w-full sm:w-auto bg-green-700 hover:bg-green-800 active:bg-green-900 text-white font-semibold px-8 py-3 rounded-xl transition-colors text-lg">
-          Calculate my food needs →
+          Calculate my food needs
         </button>
 
       </form>
     </section>
 
-    <!-- ── Results ── -->
+    <!-- Results -->
     <section id="results" class="hidden space-y-6">
 
-      <!-- Summary bar -->
       <div class="bg-green-900 text-white rounded-2xl p-6 sm:p-8">
         <h2 class="text-green-300 font-semibold uppercase text-xs tracking-widest mb-5">Your Food Plan</h2>
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
-          <div><div id="res-calories" class="text-4xl font-bold tabular-nums">—</div><div class="text-green-300 text-sm mt-1">cal / person / day</div></div>
-          <div><div id="res-oz" class="text-4xl font-bold tabular-nums">—</div><div class="text-green-300 text-sm mt-1">oz food / day</div></div>
-          <div><div id="res-lbs-day" class="text-4xl font-bold tabular-nums">—</div><div class="text-green-300 text-sm mt-1">lbs food / day</div></div>
-          <div><div id="res-total" class="text-4xl font-bold tabular-nums">—</div><div id="res-total-label" class="text-green-300 text-sm mt-1">total lbs</div></div>
+          <div><div id="res-calories" class="text-4xl font-bold tabular-nums">-</div><div class="text-green-300 text-sm mt-1">cal / person / day</div></div>
+          <div><div id="res-oz" class="text-4xl font-bold tabular-nums">-</div><div class="text-green-300 text-sm mt-1">oz food / day</div></div>
+          <div><div id="res-lbs-day" class="text-4xl font-bold tabular-nums">-</div><div class="text-green-300 text-sm mt-1">lbs food / day</div></div>
+          <div><div id="res-total" class="text-4xl font-bold tabular-nums">-</div><div id="res-total-label" class="text-green-300 text-sm mt-1">total lbs</div></div>
         </div>
       </div>
 
-      <!-- Calorie breakdown -->
       <div class="bg-white border border-stone-200 rounded-xl p-6">
         <h3 class="font-bold text-stone-800 mb-4">Calorie Breakdown</h3>
         <div class="space-y-2 text-sm">
           <div class="flex justify-between text-stone-600">
             <span>Resting metabolism (BMR)</span>
-            <span id="b-bmr" class="font-medium tabular-nums text-stone-800">—</span>
+            <span id="b-bmr" class="font-medium tabular-nums text-stone-800">-</span>
           </div>
           <div class="flex justify-between text-stone-600">
             <span id="b-hiking-label">Hiking</span>
-            <span id="b-hiking" class="font-medium tabular-nums text-stone-800">—</span>
+            <span id="b-hiking" class="font-medium tabular-nums text-stone-800">-</span>
           </div>
           <div class="flex justify-between text-stone-600">
             <span id="b-elev-label">Elevation gain</span>
-            <span id="b-elev" class="font-medium tabular-nums text-stone-800">—</span>
+            <span id="b-elev" class="font-medium tabular-nums text-stone-800">-</span>
           </div>
           <div id="b-cold-row" class="flex justify-between text-stone-600 hidden">
-            <span id="b-cold-label">Cold weather thermogenesis</span>
-            <span id="b-cold" class="font-medium tabular-nums text-stone-800">—</span>
+            <span id="b-cold-label">Cold weather</span>
+            <span id="b-cold" class="font-medium tabular-nums text-stone-800">-</span>
           </div>
           <div class="flex justify-between font-bold text-stone-900 pt-2 border-t border-stone-100">
             <span>Total</span>
-            <span id="b-total" class="tabular-nums">—</span>
+            <span id="b-total" class="tabular-nums">-</span>
           </div>
         </div>
       </div>
 
-
-      <!-- Tips -->
       <div class="bg-stone-100 rounded-xl p-6">
-        <h3 class="font-bold text-stone-800 mb-3">💡 Packing Tips</h3>
+        <h3 class="font-bold text-stone-800 mb-3">Packing Tips</h3>
         <ul class="text-sm text-stone-700 space-y-2">
-          <li><strong>Target 100 cal/oz</strong> — the standard backpacker benchmark. Below that and your pack gets heavy fast.</li>
-          <li><strong>Add 10–15% buffer</strong> on trips longer than 3 days — calorie burn on big elevation days can surprise you.</li>
-          <li><strong>Olive oil is the cheat code</strong> — 240 cal/oz, adds to any dinner, weighs almost nothing.</li>
-          <li><strong>Eat fresh food first</strong> — bring an apple or bagel for day 1, then switch to shelf-stable.</li>
+          <li><strong>Target 100 cal/oz.</strong> Below that and your pack gets heavy fast.</li>
+          <li><strong>Add a 10-15% buffer</strong> on trips longer than 3 days. Calorie burn on big elevation days can surprise you.</li>
+          <li><strong>Olive oil.</strong> 240 cal/oz, adds to any dinner, weighs almost nothing.</li>
+          <li><strong>Eat fresh food first.</strong> Bring an apple or bagel for day 1, then switch to shelf-stable.</li>
         </ul>
       </div>
 
-      <!-- Methodology -->
-      <details class="bg-white border border-stone-200 rounded-xl overflow-hidden">
-        <summary class="px-6 py-4 font-semibold text-stone-700 cursor-pointer hover:bg-stone-50 transition-colors list-none flex items-center justify-between">
-          <span>📐 Methodology</span>
-          <span class="text-stone-400 text-sm">How we calculate this</span>
-        </summary>
-        <div class="px-6 pb-6 pt-2 text-sm text-stone-600 space-y-4 border-t border-stone-100">
-          <p>The total calorie estimate is the sum of four components:</p>
-
-          <div>
-            <p class="font-semibold text-stone-800 mb-1">1. Resting Metabolic Rate (BMR)</p>
-            <p>A simplified estimate of the calories your body burns at rest over 24 hours, scaled by body weight. We use <code class="bg-stone-100 px-1 rounded">1,800 × (body_weight / 150)</code> as the baseline, which aligns with standard RMR estimates for a moderately active adult. This covers breathing, temperature regulation, and all non-exercise body functions.</p>
-          </div>
-
-          <div>
-            <p class="font-semibold text-stone-800 mb-1">2. Hiking calories</p>
-            <p>Based on the energy cost of locomotion: approximately <code class="bg-stone-100 px-1 rounded">60 cal/mile × (body_weight / 150)</code> on flat ground. Pack weight increases the metabolic load proportionally — a 30 lb pack on a 150 lb person adds roughly 20% to hiking calories. This is consistent with published research on load carriage energetics (Pandolf et al., 1977; Givoni &amp; Goldman, 1971).</p>
-          </div>
-
-          <div>
-            <p class="font-semibold text-stone-800 mb-1">3. Elevation gain</p>
-            <p>Climbing costs approximately <code class="bg-stone-100 px-1 rounded">0.5 cal/ft × (body_weight / 150)</code>. This is derived from the vertical work component of the Pandolf equation and validated against metabolic studies on inclined treadmill walking. Descent is not subtracted — the eccentric muscle work of downhill hiking also burns meaningful calories and causes delayed muscle damage.</p>
-          </div>
-
-          <div>
-            <p class="font-semibold text-stone-800 mb-1">4. Cold weather thermogenesis</p>
-            <p>Below 50°F, your body burns extra calories keeping core temperature up. We add a flat bonus: <strong>+150 cal</strong> (32–50°F), <strong>+250 cal</strong> (20–32°F), <strong>+400 cal</strong> (below 20°F). These are conservative numbers based on cold exposure research and assume you're dressed adequately. If you're underdressed, actual burn will be higher.</p>
-          </div>
-
-          <p class="text-stone-400 text-xs pt-2 border-t border-stone-100">
-Individual metabolism varies by ±15–20%. Use this as a starting point and adjust based on how you actually feel after a few trips.
-          </p>
-        </div>
-      </details>
-
     </section>
 
-    <!-- ── SEO Content ── -->
-    <section class="space-y-6 pb-10">
-      <h2 class="text-2xl font-bold text-stone-800">Backpacking Food Ideas by Meal Type</h2>
-      <p class="text-stone-600 leading-relaxed">Good backpacking food is lightweight, calorie-dense, and requires minimal prep. What actually ends up in experienced packs:</p>
-      <div class="grid sm:grid-cols-2 gap-6">
-        <div><h3 class="text-lg font-semibold text-stone-800 mb-2">Breakfast Ideas</h3><p class="text-stone-600 text-sm leading-relaxed">Instant oatmeal, granola with powdered milk, and Pop-Tarts all hit 150–400 calories and weigh almost nothing. Peanut butter packets add protein without cooking.</p></div>
-        <div><h3 class="text-lg font-semibold text-stone-800 mb-2">No-Cook Lunch Ideas</h3><p class="text-stone-600 text-sm leading-relaxed">Tortillas with tuna packets, hard cheese, salami, and crackers. Avoid low-density snacks like plain pretzels — they bulk up your pack without the calories you need.</p></div>
-        <div><h3 class="text-lg font-semibold text-stone-800 mb-2">Snack Ideas</h3><p class="text-stone-600 text-sm leading-relaxed">GORP, nut butter packets, Peanut M&amp;Ms, and energy bars. Dried mango and apricots add variety without sacrificing too much calorie density.</p></div>
-        <div><h3 class="text-lg font-semibold text-stone-800 mb-2">Dinner Ideas</h3><p class="text-stone-600 text-sm leading-relaxed">Freeze-dried meals run $10–14 but pack 600–800 cal in ~5 oz. Budget alternative: ramen with olive oil, cheese, and bacon bits. Knorr pasta sides are solid too.</p></div>
+    <!-- Methodology -->
+    <section class="bg-white border border-stone-200 rounded-xl overflow-hidden pb-10">
+      <div class="px-6 py-5 border-b border-stone-100">
+        <h2 class="font-bold text-stone-800 text-lg">Methodology</h2>
+        <p class="text-stone-500 text-sm mt-0.5">How the calorie estimate is calculated</p>
+      </div>
+      <div class="px-6 py-6 text-sm text-stone-600 space-y-5">
+        <p>The total is the sum of four components:</p>
+
+        <div>
+          <p class="font-semibold text-stone-800 mb-1">1. Resting Metabolic Rate (BMR)</p>
+          <p>Calories burned at rest over 24 hours, scaled by body weight: <code class="bg-stone-100 px-1 rounded">1,800 x (body_weight / 150)</code>. Covers breathing, temperature regulation, and all non-exercise functions.</p>
+        </div>
+
+        <div>
+          <p class="font-semibold text-stone-800 mb-1">2. Hiking calories</p>
+          <p>Energy cost of locomotion: <code class="bg-stone-100 px-1 rounded">60 cal/mile x (body_weight / 150)</code> on flat ground. Pack weight increases the load proportionally. A 30 lb pack on a 150 lb person adds roughly 20% to hiking calories. Based on load carriage energetics research (Pandolf et al., 1977; Givoni and Goldman, 1971).</p>
+        </div>
+
+        <div>
+          <p class="font-semibold text-stone-800 mb-1">3. Elevation gain</p>
+          <p>Climbing costs approximately <code class="bg-stone-100 px-1 rounded">0.5 cal/ft x (body_weight / 150)</code>, derived from the vertical work component of the Pandolf equation. Descent is not subtracted. Downhill hiking still burns meaningful calories through eccentric muscle work.</p>
+        </div>
+
+        <div>
+          <p class="font-semibold text-stone-800 mb-1">4. Cold weather thermogenesis</p>
+          <p>Below 50°F, your body burns extra calories keeping core temperature up. Flat bonus applied: <strong>+150 cal</strong> (32-50°F), <strong>+250 cal</strong> (20-32°F), <strong>+400 cal</strong> (below 20°F). Conservative numbers assuming adequate insulation. If you're underdressed, actual burn will be higher.</p>
+        </div>
+
+        <p class="text-stone-400 text-xs pt-3 border-t border-stone-100">
+          Individual metabolism varies by plus or minus 15-20%. Use this as a starting point and adjust based on how you actually feel after a few trips.
+        </p>
       </div>
     </section>
 
   </div>
 
   <script>
-    // ── Slider displays ───────────────────────────────────────────────────────
     const sliders: [string, string, (v: number) => string][] = [
       ['days',   'days-display',   v => v === 1 ? '1 day' : `${v} days`],
       ['miles',  'miles-display',  v => `${v} mile${v !== 1 ? 's' : ''}`],
@@ -226,15 +203,12 @@ Individual metabolism varies by ±15–20%. Use this as a starting point and adj
       el.addEventListener('input', () => { display.textContent = fmt(parseInt(el.value)) })
     })
 
-    // ── Calorie calculation ───────────────────────────────────────────────────
     function calcCalories(bodyWeight: number, miles: number, ascent: number, packWeight: number, tempF: number) {
       const wRatio = bodyWeight / 150
-
       const bmr        = Math.round(1800 * wRatio)
       const hikingCal  = Math.round(60 * wRatio * (1 + packWeight / bodyWeight) * miles)
       const elevCal    = Math.round(0.5 * ascent * wRatio)
       const coldCal    = tempF < 20 ? 400 : tempF < 32 ? 250 : tempF < 50 ? 150 : 0
-
       return { total: bmr + hikingCal + elevCal + coldCal, bmr, hikingCal, elevCal, coldCal }
     }
 
@@ -255,14 +229,12 @@ Individual metabolism varies by ±15–20%. Use this as a starting point and adj
       const lbsPerDay = (ozPerDay / 16).toFixed(1)
       const totalLbs  = ((ozPerDay * days) / 16).toFixed(1)
 
-      // Summary
       document.getElementById('res-calories')!.textContent    = total.toLocaleString()
       document.getElementById('res-oz')!.textContent          = String(ozPerDay)
       document.getElementById('res-lbs-day')!.textContent     = lbsPerDay
       document.getElementById('res-total')!.textContent       = totalLbs
       document.getElementById('res-total-label')!.textContent = `total lbs (${days} day${days !== 1 ? 's' : ''})`
 
-      // Breakdown
       document.getElementById('b-bmr')!.textContent          = `${bmr.toLocaleString()} cal`
       document.getElementById('b-hiking-label')!.textContent = `Hiking (${miles} mi, ${packWeight} lb pack)`
       document.getElementById('b-hiking')!.textContent       = `${hikingCal.toLocaleString()} cal`
