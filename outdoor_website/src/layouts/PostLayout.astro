@@ -14,7 +14,7 @@ const { title, description, date, backHref, backLabel, meta = [] } = Astro.props
 const formatted = date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 
-<Base title={`${title} | Trail Provisions`} description={description}>
+<Base title={`${title} | Pack Notes`} description={description}>
   <div class="max-w-3xl mx-auto px-6 py-10">
 
     <a href={backHref} class="text-sm text-green-700 hover:underline">← {backLabel}</a>
