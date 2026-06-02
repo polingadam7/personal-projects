@@ -1,260 +1,169 @@
 ---
 import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const tripReports  = (await getCollection('trip-reports')).filter(p => !p.data.draft).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 2);
+const recipes      = (await getCollection('recipes')).filter(p => !p.data.draft).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 2);
+const gearReviews  = (await getCollection('gear-reviews')).filter(p => !p.data.draft).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 2);
+const mealReviews  = (await getCollection('meal-reviews')).filter(p => !p.data.draft).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 2);
 ---
 
 <Base
-  title="Backpacking Food Calculator: How Much Food Do You Need?"
-  description="Calculate exactly how much food to bring backpacking. Enter your miles, elevation, pack weight, and temperature for a personalized daily calorie target."
+  title="Trail Provisions — Hiking, Camping and Backpacking Tips, Tools and Trip Reports"
+  description="Personal hiking, camping, and backpacking content from a California outdoor enthusiast. Trail tools, trip reports, gear reviews, and recipes."
 >
 
-  <header class="bg-green-800 text-white py-12 px-6">
+  <!-- Hero -->
+  <header class="bg-green-800 text-white py-20 px-6">
     <div class="max-w-4xl mx-auto">
-      <h1 class="text-3xl sm:text-4xl font-bold mb-3 leading-tight">
-        Backpacking Food Ideas &amp; Calorie Calculator
+      <p class="text-green-300 text-sm font-medium uppercase tracking-widest mb-4">Trail Provisions</p>
+      <h1 class="text-4xl sm:text-5xl font-bold leading-tight mb-5 max-w-2xl">
+        Trails, trips, and the occasional calorie count.
       </h1>
-      <p class="text-green-200 text-lg max-w-2xl">
-        Enter your trip details for a personalized calorie target. Miles, elevation,
-        pack weight, and temperature all factored in.
+      <p class="text-green-200 text-lg max-w-xl leading-relaxed mb-8">
+        A California backpacker's collection of trail tools, trip reports, gear takes,
+        and camp recipes. Built from stuff I wished existed before I started.
       </p>
+      <div class="flex flex-wrap gap-3">
+        <a href="/backpacking-calorie-calculator"
+          class="bg-white text-green-900 font-semibold px-6 py-3 rounded-xl hover:bg-green-50 transition-colors">
+          Try the food calculator
+        </a>
+        <a href="/trip-reports"
+          class="border border-green-500 text-white font-semibold px-6 py-3 rounded-xl hover:bg-green-700 transition-colors">
+          Read trip reports
+        </a>
+      </div>
     </div>
   </header>
 
-  <div class="max-w-4xl mx-auto px-6 py-10 space-y-10">
+  <div class="max-w-4xl mx-auto px-6 py-14 space-y-16">
 
-    <!-- Calculator -->
-    <section class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6 sm:p-8">
-      <h2 class="text-2xl font-bold mb-7 text-green-900">Calculate Your Food Needs</h2>
-
-      <form id="calc-form" class="space-y-7">
-
-        <div>
-          <label class="block font-semibold text-stone-700 mb-2">
-            Trip length: <span id="days-display" class="text-green-700">3 days</span>
-          </label>
-          <input type="range" id="days" min="1" max="21" value="3" class="w-full h-2 accent-green-700 cursor-pointer" />
-          <div class="flex justify-between text-xs text-stone-400 mt-1">
-            <span>1 day</span><span>1 week</span><span>2 weeks</span><span>3 weeks</span>
-          </div>
-        </div>
-
-        <hr class="border-stone-100" />
-
-        <div>
-          <label class="block font-semibold text-stone-700 mb-2">
-            Miles per day: <span id="miles-display" class="text-green-700">8 miles</span>
-          </label>
-          <input type="range" id="miles" min="1" max="25" value="8" class="w-full h-2 accent-green-700 cursor-pointer" />
-          <div class="flex justify-between text-xs text-stone-400 mt-1">
-            <span>1</span><span>8</span><span>16</span><span>25</span>
-          </div>
-        </div>
-
-        <div>
-          <label class="block font-semibold text-stone-700 mb-2">
-            Elevation gain per day: <span id="ascent-display" class="text-green-700">1,000 ft</span>
-          </label>
-          <input type="range" id="ascent" min="0" max="6000" step="100" value="1000" class="w-full h-2 accent-green-700 cursor-pointer" />
-          <div class="flex justify-between text-xs text-stone-400 mt-1">
-            <span>flat</span><span>1,500 ft</span><span>3,000 ft</span><span>6,000 ft</span>
-          </div>
-        </div>
-
-        <div>
-          <label class="block font-semibold text-stone-700 mb-2">
-            Pack weight: <span id="pack-display" class="text-green-700">30 lbs</span>
-          </label>
-          <input type="range" id="pack" min="10" max="70" value="30" class="w-full h-2 accent-green-700 cursor-pointer" />
-          <div class="flex justify-between text-xs text-stone-400 mt-1">
-            <span>10 lbs</span><span>ultralight</span><span>standard</span><span>70 lbs</span>
-          </div>
-        </div>
-
-        <div>
-          <label class="block font-semibold text-stone-700 mb-2">
-            Temperature: <span id="temp-display" class="text-green-700">55°F</span>
-          </label>
-          <input type="range" id="temp" min="-20" max="95" value="55" class="w-full h-2 accent-green-700 cursor-pointer" />
-          <div class="flex justify-between text-xs text-stone-400 mt-1">
-            <span>-20°F</span><span>freezing</span><span>60°F</span><span>95°F</span>
-          </div>
-        </div>
-
-        <hr class="border-stone-100" />
-
-        <div>
-          <label for="weight" class="block font-semibold text-stone-700 mb-1">
-            Your body weight
-            <span class="font-normal text-stone-400 text-sm ml-1">(optional, improves accuracy)</span>
-          </label>
-          <div class="flex items-center gap-2">
-            <input type="number" id="weight" min="80" max="400" placeholder="150"
-              class="w-24 border border-stone-300 rounded-lg px-3 py-2 text-center focus:outline-none focus:ring-2 focus:ring-green-600" />
-            <span class="text-stone-500">lbs</span>
-          </div>
-        </div>
-
-        <button type="submit"
-          class="w-full sm:w-auto bg-green-700 hover:bg-green-800 active:bg-green-900 text-white font-semibold px-8 py-3 rounded-xl transition-colors text-lg">
-          Calculate my food needs
-        </button>
-
-      </form>
-    </section>
-
-    <!-- Results -->
-    <section id="results" class="hidden space-y-6">
-
-      <div class="bg-green-900 text-white rounded-2xl p-6 sm:p-8">
-        <h2 class="text-green-300 font-semibold uppercase text-xs tracking-widest mb-5">Your Food Plan</h2>
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
-          <div><div id="res-calories" class="text-4xl font-bold tabular-nums">-</div><div class="text-green-300 text-sm mt-1">cal / person / day</div></div>
-          <div><div id="res-oz" class="text-4xl font-bold tabular-nums">-</div><div class="text-green-300 text-sm mt-1">oz food / day</div></div>
-          <div><div id="res-lbs-day" class="text-4xl font-bold tabular-nums">-</div><div class="text-green-300 text-sm mt-1">lbs food / day</div></div>
-          <div><div id="res-total" class="text-4xl font-bold tabular-nums">-</div><div id="res-total-label" class="text-green-300 text-sm mt-1">total lbs</div></div>
-        </div>
-      </div>
-
-      <div class="bg-white border border-stone-200 rounded-xl p-6">
-        <h3 class="font-bold text-stone-800 mb-4">Calorie Breakdown</h3>
-        <div class="space-y-2 text-sm">
-          <div class="flex justify-between text-stone-600">
-            <span>Resting metabolism (BMR)</span>
-            <span id="b-bmr" class="font-medium tabular-nums text-stone-800">-</span>
-          </div>
-          <div class="flex justify-between text-stone-600">
-            <span id="b-hiking-label">Hiking</span>
-            <span id="b-hiking" class="font-medium tabular-nums text-stone-800">-</span>
-          </div>
-          <div class="flex justify-between text-stone-600">
-            <span id="b-elev-label">Elevation gain</span>
-            <span id="b-elev" class="font-medium tabular-nums text-stone-800">-</span>
-          </div>
-          <div id="b-cold-row" class="flex justify-between text-stone-600 hidden">
-            <span id="b-cold-label">Cold weather</span>
-            <span id="b-cold" class="font-medium tabular-nums text-stone-800">-</span>
-          </div>
-          <div class="flex justify-between font-bold text-stone-900 pt-2 border-t border-stone-100">
-            <span>Total</span>
-            <span id="b-total" class="tabular-nums">-</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="bg-stone-100 rounded-xl p-6">
-        <h3 class="font-bold text-stone-800 mb-3">Packing Tips</h3>
-        <ul class="text-sm text-stone-700 space-y-2">
-          <li><strong>Target 100 cal/oz.</strong> Below that and your pack gets heavy fast.</li>
-          <li><strong>Add a 10-15% buffer</strong> on trips longer than 3 days. Calorie burn on big elevation days can surprise you.</li>
-          <li><strong>Olive oil.</strong> 240 cal/oz, adds to any dinner, weighs almost nothing.</li>
-          <li><strong>Eat fresh food first.</strong> Bring an apple or bagel for day 1, then switch to shelf-stable.</li>
-        </ul>
-      </div>
-
-    </section>
-
-    <!-- Methodology -->
-    <section class="bg-white border border-stone-200 rounded-xl overflow-hidden pb-10">
-      <div class="px-6 py-5 border-b border-stone-100">
-        <h2 class="font-bold text-stone-800 text-lg">Methodology</h2>
-        <p class="text-stone-500 text-sm mt-0.5">How the calorie estimate is calculated</p>
-      </div>
-      <div class="px-6 py-6 text-sm text-stone-600 space-y-5">
-        <p>The total is the sum of four components:</p>
-
-        <div>
-          <p class="font-semibold text-stone-800 mb-1">1. Resting Metabolic Rate (BMR)</p>
-          <p>Calories burned at rest over 24 hours, scaled by body weight: <code class="bg-stone-100 px-1 rounded">1,800 x (body_weight / 150)</code>. Covers breathing, temperature regulation, and all non-exercise functions.</p>
-        </div>
-
-        <div>
-          <p class="font-semibold text-stone-800 mb-1">2. Hiking calories</p>
-          <p>Energy cost of locomotion: <code class="bg-stone-100 px-1 rounded">60 cal/mile x (body_weight / 150)</code> on flat ground. Pack weight increases the load proportionally. A 30 lb pack on a 150 lb person adds roughly 20% to hiking calories. Based on load carriage energetics research (Pandolf et al., 1977; Givoni and Goldman, 1971).</p>
-        </div>
-
-        <div>
-          <p class="font-semibold text-stone-800 mb-1">3. Elevation gain</p>
-          <p>Climbing costs approximately <code class="bg-stone-100 px-1 rounded">0.5 cal/ft x (body_weight / 150)</code>, derived from the vertical work component of the Pandolf equation. Descent is not subtracted. Downhill hiking still burns meaningful calories through eccentric muscle work.</p>
-        </div>
-
-        <div>
-          <p class="font-semibold text-stone-800 mb-1">4. Cold weather thermogenesis</p>
-          <p>Below 50°F, your body burns extra calories keeping core temperature up. Flat bonus applied: <strong>+150 cal</strong> (32-50°F), <strong>+250 cal</strong> (20-32°F), <strong>+400 cal</strong> (below 20°F). Conservative numbers assuming adequate insulation. If you're underdressed, actual burn will be higher.</p>
-        </div>
-
-        <p class="text-stone-400 text-xs pt-3 border-t border-stone-100">
-          Individual metabolism varies by plus or minus 15-20%. Use this as a starting point and adjust based on how you actually feel after a few trips.
+    <!-- About -->
+    <section class="grid sm:grid-cols-2 gap-10 items-start">
+      <div>
+        <h2 class="text-2xl font-bold text-stone-900 mb-4">About this site</h2>
+        <p class="text-stone-600 leading-relaxed mb-4">
+          I grew up in the Midwest and moved out to California, where I got properly hooked on the mountains.
+          Most of what's here came out of questions I kept running into: how much food do I actually need,
+          what gear is worth buying, which routes are worth doing twice.
+        </p>
+        <p class="text-stone-600 leading-relaxed">
+          Not a gear sponsorship machine or an affiliate empire. Just a place to put useful things and
+          notes from the trail.
         </p>
       </div>
+      <div class="bg-stone-50 rounded-2xl p-6 space-y-3">
+        <p class="text-xs font-semibold uppercase tracking-widest text-stone-400 mb-4">What you'll find here</p>
+        {[
+          { icon: '🧮', label: 'Trail tools', desc: 'Calculators for food, pack weight, and trip planning' },
+          { icon: '🗺️', label: 'Trip reports', desc: 'Routes I\'ve done with honest notes on conditions' },
+          { icon: '🍲', label: 'Camp recipes', desc: 'Real meals with actual calorie counts' },
+          { icon: '🎒', label: 'Gear reviews', desc: 'What works and what I wouldn\'t buy again' },
+        ].map(item => (
+          <div class="flex gap-3 items-start">
+            <span class="text-xl mt-0.5">{item.icon}</span>
+            <div>
+              <p class="font-semibold text-stone-800 text-sm">{item.label}</p>
+              <p class="text-stone-500 text-xs">{item.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
     </section>
 
+    <!-- Featured tool -->
+    <section>
+      <h2 class="text-xl font-bold text-stone-900 mb-5">Featured Tool</h2>
+      <a href="/backpacking-calorie-calculator"
+        class="block bg-green-800 text-white rounded-2xl p-8 hover:bg-green-900 transition-colors">
+        <p class="text-green-300 text-xs font-semibold uppercase tracking-widest mb-2">Calculator</p>
+        <h3 class="text-2xl font-bold mb-2">Backpacking Food Calculator</h3>
+        <p class="text-green-200 max-w-xl">
+          How much food do you actually need? Enter your miles, elevation, pack weight, and temperature.
+          Get a calorie target with a full breakdown of where the numbers come from.
+        </p>
+        <p class="mt-4 text-sm font-semibold text-green-300">Open calculator →</p>
+      </a>
+    </section>
+
+    <!-- Recent content -->
+    {tripReports.length > 0 && (
+      <section>
+        <div class="flex items-center justify-between mb-5">
+          <h2 class="text-xl font-bold text-stone-900">Recent Trip Reports</h2>
+          <a href="/trip-reports" class="text-sm text-green-700 hover:underline">All reports</a>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          {tripReports.map(post => (
+            <a href={`/trip-reports/${post.slug}`}
+              class="block bg-white border border-stone-200 rounded-xl p-5 hover:border-green-400 hover:shadow-sm transition-all">
+              <h3 class="font-semibold text-stone-900 mb-1">{post.data.title}</h3>
+              <p class="text-stone-500 text-xs mb-2">{post.data.location}</p>
+              <p class="text-stone-600 text-sm">{post.data.description}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {recipes.length > 0 && (
+      <section>
+        <div class="flex items-center justify-between mb-5">
+          <h2 class="text-xl font-bold text-stone-900">Recent Recipes</h2>
+          <a href="/recipes" class="text-sm text-green-700 hover:underline">All recipes</a>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          {recipes.map(post => (
+            <a href={`/recipes/${post.slug}`}
+              class="block bg-white border border-stone-200 rounded-xl p-5 hover:border-green-400 hover:shadow-sm transition-all">
+              <h3 class="font-semibold text-stone-900 mb-1">{post.data.title}</h3>
+              {post.data.calories && <p class="text-green-700 text-xs font-medium mb-2">{post.data.calories} cal</p>}
+              <p class="text-stone-600 text-sm">{post.data.description}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {gearReviews.length > 0 && (
+      <section>
+        <div class="flex items-center justify-between mb-5">
+          <h2 class="text-xl font-bold text-stone-900">Recent Gear Reviews</h2>
+          <a href="/gear-reviews" class="text-sm text-green-700 hover:underline">All reviews</a>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          {gearReviews.map(post => (
+            <a href={`/gear-reviews/${post.slug}`}
+              class="block bg-white border border-stone-200 rounded-xl p-5 hover:border-green-400 hover:shadow-sm transition-all">
+              <h3 class="font-semibold text-stone-900 mb-1">{post.data.title}</h3>
+              <p class="text-amber-500 text-xs mb-2">{'★'.repeat(post.data.rating)}{'☆'.repeat(5 - post.data.rating)}</p>
+              <p class="text-stone-600 text-sm">{post.data.description}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {mealReviews.length > 0 && (
+      <section class="pb-4">
+        <div class="flex items-center justify-between mb-5">
+          <h2 class="text-xl font-bold text-stone-900">Recent Meal Reviews</h2>
+          <a href="/meal-reviews" class="text-sm text-green-700 hover:underline">All reviews</a>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          {mealReviews.map(post => (
+            <a href={`/meal-reviews/${post.slug}`}
+              class="block bg-white border border-stone-200 rounded-xl p-5 hover:border-green-400 hover:shadow-sm transition-all">
+              <h3 class="font-semibold text-stone-900 mb-1">{post.data.title}</h3>
+              <p class="text-amber-500 text-xs mb-2">{'★'.repeat(post.data.rating)}{'☆'.repeat(5 - post.data.rating)}</p>
+              <p class="text-stone-600 text-sm">{post.data.description}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
   </div>
-
-  <script>
-    const sliders: [string, string, (v: number) => string][] = [
-      ['days',   'days-display',   v => v === 1 ? '1 day' : `${v} days`],
-      ['miles',  'miles-display',  v => `${v} mile${v !== 1 ? 's' : ''}`],
-      ['ascent', 'ascent-display', v => v === 0 ? 'flat' : `${v.toLocaleString()} ft`],
-      ['pack',   'pack-display',   v => `${v} lbs`],
-      ['temp',   'temp-display',   v => `${v}°F`],
-    ]
-    sliders.forEach(([id, displayId, fmt]) => {
-      const el = document.getElementById(id) as HTMLInputElement
-      const display = document.getElementById(displayId)!
-      el.addEventListener('input', () => { display.textContent = fmt(parseInt(el.value)) })
-    })
-
-    function calcCalories(bodyWeight: number, miles: number, ascent: number, packWeight: number, tempF: number) {
-      const wRatio = bodyWeight / 150
-      const bmr        = Math.round(1800 * wRatio)
-      const hikingCal  = Math.round(60 * wRatio * (1 + packWeight / bodyWeight) * miles)
-      const elevCal    = Math.round(0.5 * ascent * wRatio)
-      const coldCal    = tempF < 20 ? 400 : tempF < 32 ? 250 : tempF < 50 ? 150 : 0
-      return { total: bmr + hikingCal + elevCal + coldCal, bmr, hikingCal, elevCal, coldCal }
-    }
-
-    document.getElementById('calc-form')!.addEventListener('submit', (e) => {
-      e.preventDefault()
-
-      const days       = parseInt((document.getElementById('days')   as HTMLInputElement).value)
-      const miles      = parseInt((document.getElementById('miles')  as HTMLInputElement).value)
-      const ascent     = parseInt((document.getElementById('ascent') as HTMLInputElement).value)
-      const packWeight = parseInt((document.getElementById('pack')   as HTMLInputElement).value)
-      const tempF      = parseInt((document.getElementById('temp')   as HTMLInputElement).value)
-      const weightRaw  = (document.getElementById('weight') as HTMLInputElement).value
-      const bodyWeight = weightRaw ? parseFloat(weightRaw) : 150
-
-      const { total, bmr, hikingCal, elevCal, coldCal } = calcCalories(bodyWeight, miles, ascent, packWeight, tempF)
-
-      const ozPerDay  = Math.round(total / 100)
-      const lbsPerDay = (ozPerDay / 16).toFixed(1)
-      const totalLbs  = ((ozPerDay * days) / 16).toFixed(1)
-
-      document.getElementById('res-calories')!.textContent    = total.toLocaleString()
-      document.getElementById('res-oz')!.textContent          = String(ozPerDay)
-      document.getElementById('res-lbs-day')!.textContent     = lbsPerDay
-      document.getElementById('res-total')!.textContent       = totalLbs
-      document.getElementById('res-total-label')!.textContent = `total lbs (${days} day${days !== 1 ? 's' : ''})`
-
-      document.getElementById('b-bmr')!.textContent          = `${bmr.toLocaleString()} cal`
-      document.getElementById('b-hiking-label')!.textContent = `Hiking (${miles} mi, ${packWeight} lb pack)`
-      document.getElementById('b-hiking')!.textContent       = `${hikingCal.toLocaleString()} cal`
-      document.getElementById('b-elev-label')!.textContent   = `Elevation (${ascent.toLocaleString()} ft)`
-      document.getElementById('b-elev')!.textContent         = `${elevCal.toLocaleString()} cal`
-      document.getElementById('b-total')!.textContent        = `${total.toLocaleString()} cal`
-
-      const coldRow = document.getElementById('b-cold-row')!
-      if (coldCal > 0) {
-        document.getElementById('b-cold-label')!.textContent = `Cold weather (${tempF}°F)`
-        document.getElementById('b-cold')!.textContent       = `${coldCal.toLocaleString()} cal`
-        coldRow.classList.remove('hidden')
-      } else {
-        coldRow.classList.add('hidden')
-      }
-
-      const results = document.getElementById('results')!
-      results.classList.remove('hidden')
-      results.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    })
-  </script>
 
 </Base>

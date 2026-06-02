@@ -38,7 +38,7 @@ You don't need to buy everything at once. Borrow what you can, rent what you can
 
 ## Food Planning
 
-Use the [Trail Provisions calorie calculator](/) to estimate how much food to bring. The common mistake is packing too much on a first trip out of anxiety — and then suffering under the weight.
+Use the [Trail Provisions calorie calculator](/backpacking-calorie-calculator) to estimate how much food to bring. The common mistake is packing too much on a first trip out of anxiety — and then suffering under the weight.
 
 For a 2-night trip at moderate activity, most people need:
 - 1.75–2 lbs of food per day
