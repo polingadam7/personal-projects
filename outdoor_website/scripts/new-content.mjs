@@ -299,7 +299,7 @@ const open = await ask('\nOpen in Obsidian? (y/n)', 'y');
 if (open.toLowerCase() !== 'n') {
   try {
     const obsidianUri = `obsidian://open?path=${encodeURIComponent(filePath)}`;
-    execSync(`start "" "${obsidianUri}"`, { stdio: 'ignore', shell: true });
+    execSync(`start ${obsidianUri}`, { stdio: 'ignore', shell: true });
   } catch {
     console.log(`${YELLOW}Could not open Obsidian. Find the file at: ${filePath}${RESET}`);
   }
