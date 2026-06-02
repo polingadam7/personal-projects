@@ -295,12 +295,13 @@ fs.writeFileSync(filePath, template, 'utf8');
 
 console.log(`\n${GREEN}${BOLD}Created:${RESET} ${path.relative(process.cwd(), filePath)}`);
 
-const open = await ask('\nOpen in VS Code? (y/n)', 'y');
+const open = await ask('\nOpen in Obsidian? (y/n)', 'y');
 if (open.toLowerCase() !== 'n') {
   try {
-    execSync(`code "${filePath}"`, { stdio: 'ignore' });
+    const obsidianUri = `obsidian://open?path=${encodeURIComponent(filePath)}`;
+    execSync(`start "" "${obsidianUri}"`, { stdio: 'ignore', shell: true });
   } catch {
-    console.log(`${YELLOW}Could not open VS Code. Open manually: ${filePath}${RESET}`);
+    console.log(`${YELLOW}Could not open Obsidian. Find the file at: ${filePath}${RESET}`);
   }
 }
 
