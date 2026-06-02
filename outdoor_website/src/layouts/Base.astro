@@ -3,7 +3,7 @@ interface Props {
   title: string;
   description?: string;
 }
-const { title, description = 'Pack Notes — Tools and content for outdoor planning' } = Astro.props;
+const { title, description = 'Toward Outdoors — Tools and content for outdoor planning' } = Astro.props;
 
 const nav = [
   { label: 'Calculator',   href: '/backpacking-calorie-calculator' },
@@ -30,7 +30,7 @@ const path = Astro.url.pathname;
   <nav class="bg-green-900 text-white sticky top-0 z-10">
     <div class="max-w-5xl mx-auto px-4 flex items-center overflow-x-auto gap-1 scrollbar-none">
       <a href="/" class="font-bold text-lg tracking-tight py-4 pr-4 shrink-0 mr-2 border-r border-green-700">
-        Pack Notes
+        Toward Outdoors
       </a>
       {nav.map(item => (
         <a
@@ -52,7 +52,7 @@ const path = Astro.url.pathname;
   </main>
 
   <footer class="border-t border-stone-200 py-8 text-center text-sm text-stone-400 mt-16">
-    Pack Notes — Free tools for outdoor planning
+    Toward Outdoors — Free tools for outdoor planning
   </footer>
 
 </body>
